@@ -1,5 +1,5 @@
 1. Conceitos básicos de nuvem, utilizando o Azure
-Nuvem pública, privada e híbrida
+* Nuvem pública, privada e híbrida
 * Infraestrutura como serviço
 * Plataforma como serviço
 * Software como serviço
