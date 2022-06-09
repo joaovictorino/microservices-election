@@ -20,6 +20,12 @@ public class CandidatesController : ControllerBase
         return new List<Candidate>();
     }
 
+    [HttpGet("{id}")]
+    public Candidate Get(int id)
+    {
+        return new Candidate();
+    }
+
     [HttpPost]
     public ActionResult Create()
     {
