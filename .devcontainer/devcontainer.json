@@ -57,10 +57,7 @@
 	"remoteUser": "vscode",
 	"features": {
 		"docker-in-docker": "latest",
-		"terraform": "latest",
 		"git": "latest",
-		"github-cli": "latest",
-		"azure-cli": "latest",
 		"sshd": "latest"
 	}
 }
