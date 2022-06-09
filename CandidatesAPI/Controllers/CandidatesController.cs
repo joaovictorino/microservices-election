@@ -4,7 +4,7 @@ using CandidatesAPI.Models;
 namespace CandidatesAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/candidates")]
 public class CandidatesController : ControllerBase
 {
     private readonly ILogger<CandidatesController> _logger;

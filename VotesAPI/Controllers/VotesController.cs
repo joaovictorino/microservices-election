@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace VotesAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/votes")]
 public class VotesController : ControllerBase
 {
     private readonly ILogger<VotesController> _logger;
