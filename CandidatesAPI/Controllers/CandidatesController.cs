@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using CandidatesAPI.Models;
+using CandidatesAPI.Infrastructure;
 
 namespace CandidatesAPI.Controllers;
 
@@ -7,28 +8,35 @@ namespace CandidatesAPI.Controllers;
 [Route("api/candidates")]
 public class CandidatesController : ControllerBase
 {
-    private readonly ILogger<CandidatesController> _logger;
+    private readonly ILogger<CandidatesController> logger;
+    private readonly CandidatesRepository repository;
 
-    public CandidatesController(ILogger<CandidatesController> logger)
+    public CandidatesController(CandidatesRepository repository, ILogger<CandidatesController> logger)
     {
-        _logger = logger;
+        this.repository = repository;
+        this.logger = logger;
     }
 
     [HttpGet]
-    public IEnumerable<Candidate> Get()
-    {
-        return new List<Candidate>();
-    }
+    public async Task<List<Candidate>> Get() => 
+        await repository.GetAllAsync();
 
-    [HttpGet("{id}")]
-    public Candidate Get(int id)
+    [HttpGet("{number}")]
+    public async Task<ActionResult<Candidate>> Get(int number)
     {
-        return new Candidate();
+        var candidate = await repository.GetAsync(number);
+
+        if (candidate is null)
+            return NotFound();
+
+        return Ok(candidate);
     }
 
     [HttpPost]
-    public ActionResult Create()
+    public async Task<ActionResult> Create(Candidate candidate)
     {
+        await repository.CreateAsync(candidate);
+
         return Ok();
     }
 }
