@@ -24,13 +24,22 @@ public class VotesController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> Create(Vote vote)
     {
-        if (vote.NumberCandidate.HasValue
-            && vote.NumberCandidate.Value != 0){
-            if(!await integration.ValidateCandidate(vote.NumberCandidate.Value)){
-                return NotFound();
+        try {
+
+            if (vote.NumberCandidate.HasValue
+                && vote.NumberCandidate.Value != 0){
+                if(!await integration.ValidateCandidate(vote.NumberCandidate.Value)){
+                    return NotFound();
+                }
             }
+
+            vote.CreatedAt = System.DateTime.Now;
+            await repository.CreateAsync(vote);
+            return Ok();
+
+        } catch(Exception)
+        {
+            return this.StatusCode(500);
         }
-        await repository.CreateAsync(vote);
-        return Ok();
     }
 }

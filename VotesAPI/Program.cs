@@ -16,6 +16,12 @@ handler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPo
                                                 };
 
 builder.Services.AddHttpClient("HttpClient")
+                .AddPolicyHandler(Policy.HandleResult<HttpResponseMessage>(r => r.StatusCode == System.Net.HttpStatusCode.Forbidden).WaitAndRetryAsync(new[]
+                                                {
+                                                    TimeSpan.FromSeconds(1),
+                                                    TimeSpan.FromSeconds(5),
+                                                    TimeSpan.FromSeconds(10)
+                                                }))
                 .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
                                                 {
                                                     TimeSpan.FromSeconds(1),
@@ -29,11 +35,11 @@ builder.Services.AddScoped<CandidatesIntegration>();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();
 

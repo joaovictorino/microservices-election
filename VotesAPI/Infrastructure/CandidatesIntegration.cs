@@ -1,4 +1,3 @@
-using System.Net.Http;
 using Microsoft.Extensions.Options;
 
 namespace VotesAPI.Infrastructure;
@@ -18,7 +17,13 @@ public class CandidatesIntegration {
         HttpClient client = httpClientFactory.CreateClient("HttpClient");
         var address = integrations.Value.CandidateAddress + number.ToString();
         HttpResponseMessage message = await client.GetAsync(address);
-        return message.IsSuccessStatusCode;
-    }
 
+        if (message.StatusCode == System.Net.HttpStatusCode.OK) {
+            return true;
+        } else if(message.StatusCode == System.Net.HttpStatusCode.NotFound) {
+            return false;
+        } else {
+            throw new Exception();
+        }
+    }
 }
