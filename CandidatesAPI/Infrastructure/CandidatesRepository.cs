@@ -1,13 +1,16 @@
 using MongoDB.Driver;
 using CandidatesAPI.Models;
 using Microsoft.Extensions.Options;
+using System.Security.Authentication;
 
 namespace CandidatesAPI.Infrastructure;
 
 public class CandidatesRepository{
     private readonly IMongoCollection<Candidate> candidateCollection;
 
-    public CandidatesRepository(IOptions<CandidateDatabaseSettings> settings){
+    public CandidatesRepository(IOptions<CandidateDatabaseSettings> settings){        
+        MongoClientSettings settingsMongo = MongoClientSettings.FromUrl(new MongoUrl(settings.Value.ConnectionString));
+        settingsMongo.SslSettings = new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
         var mongoClient = new MongoClient(settings.Value.ConnectionString);
         var mongoDatabase = mongoClient.GetDatabase(settings.Value.DatabaseName);
         candidateCollection = mongoDatabase.GetCollection<Candidate>("Candidates");

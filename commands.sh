@@ -12,3 +12,11 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 export PATH="$PATH:/home/vscode/.dotnet/tools"
 dotnet ef migrations add InitialCreate
 dotnet ef database update
+
+# Publish
+cd CandidatesAPI
+dotnet publish -c Release -o ./publish
+cd ../VotesAPI
+dotnet publish -c Release -o ./publish
+
+Instalar Azure App Service
