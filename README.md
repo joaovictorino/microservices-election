@@ -9,8 +9,7 @@
 2. Microsserviços
 * Modelos de distribuição de sistemas
 * Modelagem de serviços REST
-* Melhoria do estudo de caso, modelando os serviços e modelos de
-distribuição Microsserviços
+* Melhoria do estudo de caso, modelando os serviços e modelos de distribuição Microsserviços
 
 3. Plataforma como serviço
 * Bancos de dados e ambientes de aplicação
