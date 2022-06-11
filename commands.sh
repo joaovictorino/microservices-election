@@ -18,5 +18,3 @@ cd CandidatesAPI
 dotnet publish -c Release -o ./publish
 cd ../VotesAPI
 dotnet publish -c Release -o ./publish
-
-Instalar Azure App Service
