@@ -9,8 +9,7 @@
 2. Microsserviços
 * Modelos de distribuição de sistemas
 * Modelagem de serviços REST
-* Melhoria do estudo de caso, modelando os serviços e modelos de
-distribuição Microsserviços
+* Melhoria do estudo de caso, modelando os serviços e modelos de distribuição Microsserviços
 
 3. Plataforma como serviço
 * Bancos de dados e ambientes de aplicação
@@ -36,9 +35,3 @@ distribuição Microsserviços
 * Kong, Ocelot e outros
 * Azure API Management
 * Melhoria do estudo de caso, análise da inclusão de API gateway no projeto
-
-7. Orquestração de contêiner
-* Uso de kubernetes
-* Implantação de aplicações em k8s
-* Azure Kubernetes Service
-* Melhoria do estudo de caso, implantando o projeto em kubernetes
