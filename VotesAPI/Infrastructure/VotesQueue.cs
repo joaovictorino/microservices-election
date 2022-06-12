@@ -3,6 +3,8 @@ using VotesAPI.Models;
 using System.Text;
 using System.Text.Json;
 
+namespace VotesAPI.Infrastructure;
+
 public class VotesQueue{
     private readonly IConfiguration configuration;
 
