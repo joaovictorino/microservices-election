@@ -1,5 +1,6 @@
 using VotesAPI.Infrastructure;
 using Polly;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,12 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 //}
+
+using(var scope = app.Services.CreateScope()){
+    var db = scope.ServiceProvider.GetRequiredService<DataContext>();
+    db.Database.Migrate();
+}
+
 
 app.UseHttpsRedirection();
 
