@@ -8,15 +8,15 @@ namespace VotesAPI.Controllers;
 [Route("api/votes")]
 public class VotesController : ControllerBase
 {
-    private readonly VotesRepository repository;
     private readonly CandidatesIntegration integration;
+    private readonly VotesQueue queue;
     private readonly ILogger<VotesController> logger;
 
-    public VotesController( VotesRepository repository, 
+    public VotesController( VotesQueue queue,
                             CandidatesIntegration integration,
                             ILogger<VotesController> logger)
     {
-        this.repository = repository;
+        this.queue = queue;
         this.integration = integration;
         this.logger = logger;
     }
@@ -34,7 +34,7 @@ public class VotesController : ControllerBase
             }
 
             vote.CreatedAt = System.DateTime.Now;
-            await repository.CreateAsync(vote);
+            queue.Send(vote);
             return Ok();
 
         } catch(Exception)

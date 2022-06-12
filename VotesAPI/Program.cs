@@ -1,14 +1,11 @@
 using VotesAPI.Infrastructure;
 using Polly;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<DataContext>();
-builder.Services.AddScoped<VotesRepository>();
 
 HttpClientHandler handler = new HttpClientHandler();
 handler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
@@ -33,6 +30,7 @@ builder.Services.AddHttpClient("HttpClient")
 
 builder.Services.Configure<IntegrationsSettings>(builder.Configuration.GetSection("Integrations"));
 builder.Services.AddScoped<CandidatesIntegration>();
+builder.Services.AddScoped<VotesQueue>();
 
 var app = builder.Build();
 
@@ -41,12 +39,6 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 //}
-
-using(var scope = app.Services.CreateScope()){
-    var db = scope.ServiceProvider.GetRequiredService<DataContext>();
-    db.Database.Migrate();
-}
-
 
 app.UseHttpsRedirection();
 
