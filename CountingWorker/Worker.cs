@@ -4,36 +4,31 @@ using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Text.Json;
 using CountingWorker.Models;
+using CountingWorker.Infrastructure;
 
 namespace CountingWorker;
 
 public class Worker : BackgroundService
 {
-    private readonly ILogger<Worker> _logger;
+    private readonly ILogger<Worker> logger;
+    private readonly VotesRepository repository;
+    private readonly VotesQueue queue;
 
-    public Worker(ILogger<Worker> logger)
+    public Worker(VotesQueue queue, VotesRepository repository, ILogger<Worker> logger)
     {
-        _logger = logger;
+        this.queue = queue;
+        this.repository = repository;
+        this.logger = logger;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var factory = new ConnectionFactory() { HostName = "localhost" };
-        using(var connection = factory.CreateConnection())
-        using(var channel = connection.CreateModel()){
-            channel.QueueDeclare("votes", false, false, false, null);
-            var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (model, ea) => {
-                var body = ea.Body.ToArray();
-                var message = Encoding.UTF8.GetString(body);
-                _logger.LogInformation(message);
-            };
+        queue.CreateConnection();
 
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                channel.BasicConsume("votes", true, consumer);
-                await Task.Delay(1000, stoppingToken);
-            }
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            queue.Receive();
+            await Task.Delay(1000, stoppingToken);
         }
     }
 }

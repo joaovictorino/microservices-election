@@ -6,9 +6,9 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/CountingApp/bin/Debug/net6.0/CountingApp.dll",
+            "program": "${workspaceFolder}/CountingWorker/bin/Debug/net6.0/CountingWorker.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/CountingApp",
+            "cwd": "${workspaceFolder}/CountingWorker",
             "stopAtEntry": false,
             "console": "internalConsole"
         },

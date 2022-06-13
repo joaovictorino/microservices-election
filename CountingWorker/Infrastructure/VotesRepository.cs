@@ -1,6 +1,6 @@
-using CountingApp.Models;
+using CountingWorker.Models;
 
-namespace CountingApp.Infrastructure;
+namespace CountingWorker.Infrastructure;
 
 public class VotesRepository{
 

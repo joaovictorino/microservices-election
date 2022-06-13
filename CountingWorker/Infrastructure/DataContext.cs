@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using CountingApp.Models;
+using CountingWorker.Models;
 using Microsoft.Extensions.Configuration;
 
-namespace CountingApp.Infrastructure;
+namespace CountingWorker.Infrastructure;
 
 public class DataContext : DbContext {
     protected readonly IConfiguration configuration;
