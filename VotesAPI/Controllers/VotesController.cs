@@ -25,16 +25,21 @@ public class VotesController : ControllerBase
     public async Task<ActionResult> Create(Vote vote)
     {
         try {
+            VoteMessage message = new VoteMessage();
 
             if (vote.NumberCandidate.HasValue
                 && vote.NumberCandidate.Value != 0){
-                if(!await integration.ValidateCandidate(vote)){
+                Candidate candidate = await integration.FindCandidate(vote);
+
+                if(candidate == null)
                     return NotFound();
-                }
+                else
+                    message.NameCandidate = candidate.Name;
             }
 
-            vote.CreatedAt = System.DateTime.Now;
-            queue.Send(vote);
+            message.CreatedAt = System.DateTime.Now;
+            message.NumberCandidate = vote.NumberCandidate;
+            queue.Send(message);
             return Ok();
 
         } catch(Exception)

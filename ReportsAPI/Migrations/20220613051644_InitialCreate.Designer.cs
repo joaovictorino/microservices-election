@@ -12,7 +12,7 @@ using ReportsAPI.Infrastructure;
 namespace ReportsAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220610042448_InitialCreate")]
+    [Migration("20220613051644_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace ReportsAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("VotesAPI.Models.Vote", b =>
+            modelBuilder.Entity("ReportsAPI.Models.Vote", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,11 +35,12 @@ namespace ReportsAPI.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("NameCandidate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("NumberCandidate")
                         .HasColumnType("int");
-
-                    b.Property<string>("NameCandidate")
-                        .HasColumnType("varchar");
 
                     b.HasKey("Id");
 

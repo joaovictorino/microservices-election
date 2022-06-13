@@ -15,18 +15,16 @@ public class CandidatesIntegration {
         this.integrations = integrations;
     }
 
-    public async Task<bool> ValidateCandidate(Vote vote){
+    public async Task<Candidate> FindCandidate(Vote vote){
         HttpClient client = httpClientFactory.CreateClient("HttpClient");
         var address = integrations.Value.CandidateAddress + vote.NumberCandidate.Value.ToString();
         HttpResponseMessage message = await client.GetAsync(address);
 
         if (message.StatusCode == System.Net.HttpStatusCode.OK) {
             string jsonMessage = await message.Content.ReadAsStringAsync();
-            Candidate candidate = JsonSerializer.Deserialize<Candidate>(jsonMessage);
-            vote.NameCandidate = candidate.Name;
-            return true;
+            return JsonSerializer.Deserialize<Candidate>(jsonMessage);
         } else if(message.StatusCode == System.Net.HttpStatusCode.NotFound) {
-            return false;
+            return null;
         } else {
             throw new Exception();
         }
