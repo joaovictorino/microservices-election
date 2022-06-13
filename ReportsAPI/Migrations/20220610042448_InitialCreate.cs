@@ -16,6 +16,7 @@ namespace ReportsAPI.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NumberCandidate = table.Column<int>(type: "int", nullable: false),
+                    NameCandidate = table.Column<string>(type: "varchar", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

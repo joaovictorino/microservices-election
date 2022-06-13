@@ -9,7 +9,10 @@ public class VotesRepository{
         this.context = context;
     }
 
-    public List<Vote> GetAll(){
-        return context.Votes.AsQueryable().ToList();
+    public List<Report> GetAll(){
+        return context.Votes
+                        .GroupBy(p => new { p.NumberCandidate, p.NameCandidate })
+                        .Select(r => new Report { NameCandidate = r.Key.NameCandidate, NumberCandidate = r.Key.NumberCandidate, Count = r.Count() })
+                        .ToList();
     }
 }

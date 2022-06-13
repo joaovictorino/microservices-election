@@ -38,6 +38,9 @@ namespace ReportsAPI.Migrations
                     b.Property<int>("NumberCandidate")
                         .HasColumnType("int");
 
+                    b.Property<string>("NameCandidate")
+                        .HasColumnType("varchar");
+
                     b.HasKey("Id");
 
                     b.ToTable("Votes");

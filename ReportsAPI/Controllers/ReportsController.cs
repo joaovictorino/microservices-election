@@ -19,7 +19,7 @@ public class ReportsController : ControllerBase
     }
 
     [HttpGet()]
-    public IEnumerable<Vote> Get()
+    public List<Report> Get()
     {
         return this.repository.GetAll();
     }

@@ -28,7 +28,7 @@ public class VotesController : ControllerBase
 
             if (vote.NumberCandidate.HasValue
                 && vote.NumberCandidate.Value != 0){
-                if(!await integration.ValidateCandidate(vote.NumberCandidate.Value)){
+                if(!await integration.ValidateCandidate(vote)){
                     return NotFound();
                 }
             }
