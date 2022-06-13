@@ -36,10 +36,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_ConnectionStrings__VotesDatabase=Data Source=sqlserver; Initial Catalog=votes; User Id=sa;Password=Teste@admin123
 
-  counterworker:
-    build: ./CounterWorker
-    ports:
-      - 7194:80
+  countingworker:
+    build: ./CountingWorker
     networks:
       - election
     environment:
