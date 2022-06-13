@@ -41,9 +41,9 @@ services:
     networks:
       - election
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_RabbitMQ=rabbitmq
-      - ASPNETCORE_ConnectionStrings__VotesDatabase=Data Source=sqlserver; Initial Catalog=votes; User Id=sa;Password=Teste@admin123
+      - DOTNET_ENVIRONMENT=Production
+      - DOTNET_RabbitMQ=rabbitmq
+      - DOTNET_ConnectionStrings__VotesDatabase=Data Source=sqlserver; Initial Catalog=votes; User Id=sa;Password=Teste@admin123
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest

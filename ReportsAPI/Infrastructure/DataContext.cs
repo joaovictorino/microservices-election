@@ -11,7 +11,7 @@ public class DataContext : DbContext {
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options){
-        options.UseSqlServer(configuration.GetConnectionString("ReportsDatabase"));
+        options.UseSqlServer(configuration.GetConnectionString("VotesDatabase"));
     }
 
     public DbSet<Vote> Votes { get; set; }
