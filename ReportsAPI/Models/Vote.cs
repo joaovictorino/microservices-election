@@ -1,10 +1,9 @@
 using System.Text.Json.Serialization;
 
-namespace VotesAPI.Models;
+namespace ReportsAPI.Models;
 
 public class Vote{
-
+    public int Id {get;set;}
     public int? NumberCandidate { get; set; }
-    
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }    
 }

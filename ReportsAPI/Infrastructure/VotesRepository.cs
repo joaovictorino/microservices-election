@@ -1,6 +1,5 @@
-using CountingApp.Models;
-
-namespace CountingApp.Infrastructure;
+namespace ReportsAPI.Infrastructure;
+using ReportsAPI.Models;
 
 public class VotesRepository{
 
@@ -10,8 +9,7 @@ public class VotesRepository{
         this.context = context;
     }
 
-    public void Create(Vote vote){
-        context.Add(vote);
-        context.SaveChanges();
+    public List<Vote> GetAll(){
+        return context.Votes.AsQueryable().ToList();
     }
 }

@@ -6,7 +6,6 @@ public class Vote{
 
     public int? NumberCandidate { get; set; }
     
-    [JsonIgnore]
     public DateTime CreatedAt { get; set; }
     
 }

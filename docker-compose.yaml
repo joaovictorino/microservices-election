@@ -4,27 +4,38 @@ networks:
   election:
 
 services:
-  candidatesapi:
-    build: ./CandidatesAPI
-    ports:
-      - 7003:80
-    networks:
-      - election
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_CandidateDatabase__ConnectionString=mongodb://mongo:27017
-      - ASPNETCORE_CandidateDatabase__DatabaseName=Candidates
+  # candidatesapi:
+  #   build: ./CandidatesAPI
+  #   ports:
+  #     - 7003:80
+  #   networks:
+  #     - election
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Production
+  #     - ASPNETCORE_CandidateDatabase__ConnectionString=mongodb://mongo:27017
+  #     - ASPNETCORE_CandidateDatabase__DatabaseName=Candidates
 
-  votesapi:
-    build: ./VotesAPI
-    ports:
-      - 7193:80
-    networks:
-      - election
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_ConnectionStrings__VotesDatabase=Data Source=sqlserver; Initial Catalog=votes; User Id=sa;Password=Teste@admin123
-      - ASPNETCORE_Integrations__CandidateAddress=http://candidatesapi/api/candidates/
+  # votesapi:
+  #   build: ./VotesAPI
+  #   ports:
+  #     - 7193:80
+  #   networks:
+  #     - election
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Production
+  #     - ASPNETCORE_RabbitMQ=localhost
+  #     - ASPNETCORE_Integrations__CandidateAddress=http://candidatesapi/api/candidates/
+
+  # reportsapi:
+  #   build: ./ReportsAPI
+  #   ports:
+  #     - 7194:80
+  #   networks:
+  #     - election
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Production
+  #     - ASPNETCORE_ConnectionStrings__VotesDatabase=Data Source=sqlserver; Initial Catalog=votes; User Id=sa;Password=Teste@admin123
+  #     - ASPNETCORE_Integrations__CandidateAddress=http://candidatesapi/api/candidates/
 
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -40,5 +51,13 @@ services:
     image: mongo
     ports:
       - 27017:27017
+    networks:
+      - election
+
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    ports:
+      - 5672:5672
+      - 15672:15672
     networks:
       - election
