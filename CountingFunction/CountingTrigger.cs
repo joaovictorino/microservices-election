@@ -11,13 +11,12 @@ namespace CountingFunction
     public static class CountingTrigger
     {
         [FunctionName("CountingTrigger")]
-        public static async void Run( [ServiceBusTrigger("votesmq", Connection = "ServiceBusConnection")]string myQueueItem, 
+        public static void Run( [ServiceBusTrigger("votesmq", Connection = "ServiceBusConnection")]string myQueueItem, 
                                 ILogger log,
-                                [Sql("dbo.Votes", ConnectionStringSetting="SqlConnectionString")] IAsyncCollector<Vote> voteAsync)
+                                [Sql("dbo.Votes", ConnectionStringSetting="SqlConnectionString")] ICollector<Vote> voteAsync)
         {
             Vote vote = JsonSerializer.Deserialize<Vote>(myQueueItem);
-            await voteAsync.AddAsync(vote);
-            await voteAsync.FlushAsync();
+            voteAsync.Add(vote);
             
             log.LogInformation($"C# ServiceBus queue trigger function processed message: {myQueueItem}");
         }
