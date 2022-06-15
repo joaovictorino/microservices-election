@@ -9,10 +9,10 @@ namespace VotesAPI.Controllers;
 public class VotesController : ControllerBase
 {
     private readonly CandidatesIntegration integration;
-    private readonly VotesQueue queue;
+    private readonly IVotesQueue queue;
     private readonly ILogger<VotesController> logger;
 
-    public VotesController( VotesQueue queue,
+    public VotesController( IVotesQueue queue,
                             CandidatesIntegration integration,
                             ILogger<VotesController> logger)
     {
@@ -42,8 +42,9 @@ public class VotesController : ControllerBase
             queue.Send(message);
             return Ok();
 
-        } catch(Exception)
+        } catch(Exception ex)
         {
+            logger.LogError(ex, "Error");
             return this.StatusCode(500);
         }
     }

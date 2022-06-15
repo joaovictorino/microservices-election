@@ -30,7 +30,15 @@ builder.Services.AddHttpClient("HttpClient")
 
 builder.Services.Configure<IntegrationsSettings>(builder.Configuration.GetSection("Integrations"));
 builder.Services.AddScoped<CandidatesIntegration>();
-builder.Services.AddScoped<VotesQueue>();
+
+string? azureEnv = Environment.GetEnvironmentVariable("ASPNETCORE_Azure");
+
+if(!string.IsNullOrEmpty(azureEnv)
+    && Convert.ToBoolean(azureEnv)){
+    builder.Services.AddScoped<IVotesQueue, VotesQueueBus>();
+}else{
+    builder.Services.AddScoped<IVotesQueue, VotesQueue>();
+}
 
 var app = builder.Build();
 

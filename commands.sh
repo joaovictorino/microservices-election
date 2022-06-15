@@ -18,3 +18,16 @@ cd CandidatesAPI
 dotnet publish -c Release -o ./publish
 cd ../VotesAPI
 dotnet publish -c Release -o ./publish
+
+# Azure Function
+Install Azure function tools
+
+func init CountingFunction
+func new --template "Service Bus Queue Trigger" --name CountingTrigger
+
+Criar CosmosDB for MongoDB
+Criar SQL Databases
+Criar Azure Container Registry
+Criar Service Bus
+Criar 3 Azure Container Instances
+Criar Azure Function

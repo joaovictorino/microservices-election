@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace VotesAPI.Infrastructure;
 
-public class VotesQueue{
+public class VotesQueue : IVotesQueue {
     private readonly IConfiguration configuration;
 
     public VotesQueue(IConfiguration configuration){
