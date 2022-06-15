@@ -8,15 +8,15 @@ namespace VotesAPI.Controllers;
 [Route("api/votes")]
 public class VotesController : ControllerBase
 {
-    private readonly VotesRepository repository;
     private readonly CandidatesIntegration integration;
+    private readonly IVotesQueue queue;
     private readonly ILogger<VotesController> logger;
 
-    public VotesController( VotesRepository repository, 
+    public VotesController( IVotesQueue queue,
                             CandidatesIntegration integration,
                             ILogger<VotesController> logger)
     {
-        this.repository = repository;
+        this.queue = queue;
         this.integration = integration;
         this.logger = logger;
     }
@@ -25,20 +25,26 @@ public class VotesController : ControllerBase
     public async Task<ActionResult> Create(Vote vote)
     {
         try {
+            VoteMessage message = new VoteMessage();
 
             if (vote.NumberCandidate.HasValue
                 && vote.NumberCandidate.Value != 0){
-                if(!await integration.ValidateCandidate(vote.NumberCandidate.Value)){
+                Candidate candidate = await integration.FindCandidate(vote);
+
+                if(candidate == null)
                     return NotFound();
-                }
+                else
+                    message.NameCandidate = candidate.Name;
             }
 
-            vote.CreatedAt = System.DateTime.Now;
-            await repository.CreateAsync(vote);
+            message.CreatedAt = System.DateTime.Now;
+            message.NumberCandidate = vote.NumberCandidate;
+            queue.Send(message);
             return Ok();
 
-        } catch(Exception)
+        } catch(Exception ex)
         {
+            logger.LogError(ex, "Error");
             return this.StatusCode(500);
         }
     }

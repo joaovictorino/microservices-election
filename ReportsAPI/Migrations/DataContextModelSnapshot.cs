@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using VotesAPI.Infrastructure;
+using ReportsAPI.Infrastructure;
 
 #nullable disable
 
-namespace VotesAPI.Migrations
+namespace ReportsAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace VotesAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("VotesAPI.Models.Vote", b =>
+            modelBuilder.Entity("ReportsAPI.Models.Vote", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,6 +32,10 @@ namespace VotesAPI.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("NameCandidate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberCandidate")
                         .HasColumnType("int");
