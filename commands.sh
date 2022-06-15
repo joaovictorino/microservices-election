@@ -28,6 +28,8 @@ func new --template "Service Bus Queue Trigger" --name CountingTrigger
 Criar CosmosDB for MongoDB
 Criar SQL Databases
 Criar Azure Container Registry
+    Permitir admin user
 Criar Service Bus
+    Criar Queue
 Criar 3 Azure Container Instances
-Criar Azure Function
+Criar Azure Function (Premium - Linux)
