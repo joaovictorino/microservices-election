@@ -19,6 +19,12 @@ dotnet publish -c Release -o ./publish
 cd ../VotesAPI
 dotnet publish -c Release -o ./publish
 
+# Container
+docker login bootcampici.azurecr.io
+docker push bootcampici.azurecr.io/votesapi
+docker push bootcampici.azurecr.io/candidatesapi
+docker push bootcampici.azurecr.io/reportsapi
+
 # Azure Function
 Install Azure function tools
 

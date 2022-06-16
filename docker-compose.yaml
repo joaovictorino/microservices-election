@@ -14,8 +14,16 @@ services:
       - election
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_CandidateDatabase__ConnectionString=mongodb://mongo:27017
       - ASPNETCORE_CandidateDatabase__DatabaseName=Candidates
+      - ASPNETCORE_CandidateDatabase__ConnectionString=mongodb://mongo:27017
+
+  reportsapi:
+    build: ./ReportsAPI
+    networks:
+      - election
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ConnectionStrings__VotesDatabase=Data Source=sqlserver; Initial Catalog=votes; User Id=sa;Password=Teste@admin123
 
   votesapi:
     build: ./VotesAPI
@@ -26,14 +34,6 @@ services:
       - ASPNETCORE_RabbitMQ=rabbitmq
       - ASPNETCORE_Azure=false
       - ASPNETCORE_Integrations__CandidateAddress=http://candidatesapi/api/candidates/
-
-  reportsapi:
-    build: ./ReportsAPI
-    networks:
-      - election
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_ConnectionStrings__VotesDatabase=Data Source=sqlserver; Initial Catalog=votes; User Id=sa;Password=Teste@admin123
 
   countingworker:
     build: ./CountingWorker
