@@ -29,7 +29,8 @@
 				"ms-azuretools.vscode-docker",
 				"mongodb.mongodb-vscode",
 				"ms-mssql.sql-database-projects-vscode",
-				"ms-mssql.mssql"
+				"ms-mssql.mssql",
+				"humao.rest-client"
 			]
 		}
 	},
