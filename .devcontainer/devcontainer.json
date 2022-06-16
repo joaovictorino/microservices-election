@@ -20,6 +20,16 @@
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"ms-dotnettools.csharp",
+				"ms-vscode.azure-account",
+				"ms-azuretools.vscode-azureappservice",
+				"ms-azuretools.vscode-cosmosdb",
+				"ms-azuretools.vscode-azurefunctions",
+				"ms-azuretools.vscode-azureresourcegroups",
+				"ms-mssql.data-workspace-vscode",
+				"ms-azuretools.vscode-docker",
+				"mongodb.mongodb-vscode",
+				"ms-mssql.sql-database-projects-vscode",
+				"ms-mssql.mssql",
 				"humao.rest-client"
 			]
 		}
