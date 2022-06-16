@@ -40,6 +40,7 @@ docker-compose run -it kong kong migrations bootstrap
 # Keycloak 
 admin/admin
 
+# install plugins
 curl -s -X POST http://localhost:8001/plugins \
   -d name=oidc \
   -d config.client_id=kong \

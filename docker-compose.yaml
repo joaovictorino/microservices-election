@@ -10,8 +10,6 @@ volumes:
 services:
   candidatesapi:
     build: ./CandidatesAPI
-    ports:
-      - 7003:80
     networks:
       - election
     environment:
@@ -21,8 +19,6 @@ services:
 
   votesapi:
     build: ./VotesAPI
-    ports:
-      - 7193:80
     networks:
       - election
     environment:
@@ -33,8 +29,6 @@ services:
 
   reportsapi:
     build: ./ReportsAPI
-    ports:
-      - 7188:80
     networks:
       - election
     environment:
