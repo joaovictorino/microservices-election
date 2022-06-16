@@ -33,3 +33,32 @@ Criar Service Bus
     Criar Queue
 Criar 3 Azure Container Instances
 Criar Azure Function (Premium - Linux)
+
+# Kong e Keycloak
+docker-compose run -it kong kong migrations bootstrap
+
+# Keycloak 
+admin/admin
+
+curl -s -X POST http://localhost:8001/plugins \
+  -d name=oidc \
+  -d config.client_id=kong \
+  -d config.client_secret=x0KPu2n0bIQxyg78HNcRERFyKmu83Kdr \
+  -d config.bearer_only=yes \
+  -d config.realm=bootcamp \
+  -d config.introspection_endpoint=http://172.19.0.12:8080/realms/bootcamp/protocol/openid-connect/token/introspect \
+  -d config.discovery=http://172.19.0.12:8080/auth/realms/bootcamp/.well-known/openid-configuration
+
+# get token
+curl -X POST \
+        -H "Content-Type: application/x-www-form-urlencoded" \
+        -d "username=joao" \
+        -d "password=teste" \
+        -d 'grant_type=password' \
+        -d "client_id=app" \
+        http://172.19.0.12:8080/realms/bootcamp/protocol/openid-connect/token 
+
+# access with token
+curl http://localhost:8000/reports -H "Authorization: Bearer {JWT}"
+curl http://localhost:8000/votes -H "Authorization: Bearer {JWT}"
+curl http://localhost:8000/candidates -H "Authorization: Bearer {JWT}"

@@ -131,7 +131,7 @@ services:
     environment:
       - DB_ADAPTER=postgres
       - DB_HOST=kong-db
-      - DB_PORT='5432'
+      - DB_PORT=5432
       - DB_USER=kong
       - DB_PASSWORD=kong
       - DB_DATABASE=api-gw
