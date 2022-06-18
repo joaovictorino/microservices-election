@@ -5,7 +5,7 @@ using ReportsAPI.Infrastructure;
 namespace ReportsAPI.Controllers;
 
 [ApiController]
-[Route("reports")]
+[Route("api/reports")]
 public class ReportsController : ControllerBase
 {
 
