@@ -31,8 +31,8 @@ services:
       - election
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_RabbitMQ=rabbitmq
       - ASPNETCORE_Azure=false
+      - ASPNETCORE_RabbitMQ=rabbitmq
       - ASPNETCORE_Integrations__CandidateAddress=http://candidatesapi/api/candidates/
 
   countingworker:
