@@ -1,4 +1,6 @@
 using Microsoft.Extensions.Options;
+using System.Text.Json;
+using VotesAPI.Models;
 
 namespace VotesAPI.Infrastructure;
 
@@ -13,15 +15,16 @@ public class CandidatesIntegration {
         this.integrations = integrations;
     }
 
-    public async Task<bool> ValidateCandidate(int number){
+    public async Task<Candidate> FindCandidate(Vote vote){
         HttpClient client = httpClientFactory.CreateClient("HttpClient");
-        var address = integrations.Value.CandidateAddress + number.ToString();
+        var address = integrations.Value.CandidateAddress + vote.NumberCandidate.Value.ToString();
         HttpResponseMessage message = await client.GetAsync(address);
 
         if (message.StatusCode == System.Net.HttpStatusCode.OK) {
-            return true;
+            string jsonMessage = await message.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<Candidate>(jsonMessage);
         } else if(message.StatusCode == System.Net.HttpStatusCode.NotFound) {
-            return false;
+            return null;
         } else {
             throw new Exception();
         }

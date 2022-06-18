@@ -6,8 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<DataContext>();
-builder.Services.AddScoped<VotesRepository>();
 
 HttpClientHandler handler = new HttpClientHandler();
 handler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) =>
@@ -32,6 +30,15 @@ builder.Services.AddHttpClient("HttpClient")
 
 builder.Services.Configure<IntegrationsSettings>(builder.Configuration.GetSection("Integrations"));
 builder.Services.AddScoped<CandidatesIntegration>();
+
+string? azureEnv = Environment.GetEnvironmentVariable("ASPNETCORE_Azure");
+
+if(!string.IsNullOrEmpty(azureEnv)
+    && Convert.ToBoolean(azureEnv)){
+    builder.Services.AddScoped<IVotesQueue, VotesQueueBus>();
+}else{
+    builder.Services.AddScoped<IVotesQueue, VotesQueue>();
+}
 
 var app = builder.Build();
 

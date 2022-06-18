@@ -1,0 +1,10 @@
+POST http://localhost:8001/plugins
+Content-Type: application/x-www-form-urlencoded
+
+name=oidc
+&config.client_id=kong
+&config.client_secret=x0KPu2n0bIQxyg78HNcRERFyKmu83Kdr
+&config.bearer_only=yes
+&config.realm=bootcamp
+&config.introspection_endpoint=http://172.19.0.12:8080/realms/bootcamp/protocol/openid-connect/token/introspect
+&config.discovery=http://172.19.0.12:8080/auth/realms/bootcamp/.well-known/openid-configuration

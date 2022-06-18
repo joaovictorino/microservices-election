@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using VotesAPI.Models;
+using CountingWorker.Models;
+using Microsoft.Extensions.Configuration;
 
-namespace VotesAPI.Infrastructure;
+namespace CountingWorker.Infrastructure;
 
 public class DataContext : DbContext {
     protected readonly IConfiguration configuration;

@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using VotesAPI.Infrastructure;
+using ReportsAPI.Infrastructure;
 
 #nullable disable
 
-namespace VotesAPI.Migrations
+namespace ReportsAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220610042448_InitialCreate")]
+    [Migration("20220613051644_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace VotesAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("VotesAPI.Models.Vote", b =>
+            modelBuilder.Entity("ReportsAPI.Models.Vote", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -34,6 +34,10 @@ namespace VotesAPI.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("NameCandidate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberCandidate")
                         .HasColumnType("int");
