@@ -1,6 +1,6 @@
 ## How to execute the election API sample
 
-Prerequisites
+### Prerequisites
 - Docker
 - Docker Compose
 - .Net 6 SDK
