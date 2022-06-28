@@ -8,7 +8,7 @@
 ### Architecture
 ![alt architecture](.documentation/microsservicos_local.jpg "Architecture")
 
-First of all, run MongoDB and SQL Server inside docker-compose with the following:
+First of all, run MongoDB and SQL Server inside docker-compose with the following command:
 
 ````sh
 docker-compose up
