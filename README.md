@@ -17,10 +17,9 @@ After all databases is running, initiate new terminal, go to the folder Candidat
 dotnet run
 ````
 
-If command fails because of server certification, execute ````sh dotnet dev-certs https --trust ````
+If command fails because of server certification, execute ````dotnet dev-certs https --trust````
 
-When CandidatesAPI is running, access https://localhost:7003/swagger/index.html
-Test CandidateAPI inside Swagger.
+When CandidatesAPI is running, access https://localhost:7003/swagger/index.html and test CandidateAPI inside Swagger.
 
 After everything is ok, go to VotesAPI folder and execute the sequence of commands bellow:
 
@@ -30,4 +29,4 @@ export PATH="$PATH:/home/vscode/.dotnet/tools"
 dotnet ef database update
 ````
 
-After executed, SQL Server table will be created, and then execute ````sh dotnet run ````. Access https://localhost:7193/swagger/index.html and test, trying to vote.
+After executed, SQL Server table will be created, and then execute ````dotnet run````. Access https://localhost:7193/swagger/index.html and test, trying to vote.
