@@ -7,8 +7,9 @@ dotnet add package MongoDB.Driver
 
 # Entity Framework (VotesAPI)
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-dotnet tool install -g dotnet-ef
 dotnet add package Microsoft.EntityFrameworkCore.Design
-export PATH="$PATH:/home/vscode/.dotnet/tools"
 dotnet ef migrations add InitialCreate
+
+dotnet tool install -g dotnet-ef
+export PATH="$PATH:/home/vscode/.dotnet/tools"
 dotnet ef database update
