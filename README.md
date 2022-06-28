@@ -30,3 +30,5 @@ dotnet ef database update
 ````
 
 After executed, SQL Server table will be created, and then execute ````dotnet run````. Access https://localhost:7193/swagger/index.html and test, trying to vote.
+
+![alt architecture](.documentation/microsservicos_local.jpg "Architecture")
