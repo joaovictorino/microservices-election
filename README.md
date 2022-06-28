@@ -5,6 +5,9 @@ Prerequisites
 - Docker Compose
 - .Net 6 SDK
 
+### Architecture
+![alt architecture](.documentation/microsservicos_local.jpg "Architecture")
+
 First of all, run MongoDB and SQL Server inside docker-compose with the following:
 
 ````sh
@@ -30,5 +33,3 @@ dotnet ef database update
 ````
 
 After executed, SQL Server table will be created, and then execute ````dotnet run````. Access https://localhost:7193/swagger/index.html and test, trying to vote.
-
-![alt architecture](.documentation/microsservicos_local.jpg "Architecture")
