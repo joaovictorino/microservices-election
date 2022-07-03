@@ -6,7 +6,7 @@
 - .Net 6 SDK
 
 ### Architecture
-![alt architecture](.documentation/microsservicos_local.jpg "Architecture")
+![alt architecture](.documentation/microservices_local.jpg "Architecture")
 
 First of all, run MongoDB and SQL Server inside docker-compose with the following command:
 
