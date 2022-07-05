@@ -25,3 +25,6 @@ cd CandidatesAPI
 dotnet publish -c Release -o ./publish
 cd ../VotesAPI
 dotnet publish -c Release -o ./publish
+
+# Docker Compose
+docker compose -f docker-compose-azure.yaml up

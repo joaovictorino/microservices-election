@@ -1,0 +1,59 @@
+version: '3'
+
+networks:
+  election:
+
+services:
+
+  candidatesapi-pr:
+    image: nginx
+    ports:
+      - 80:80
+    networks:
+      - election
+
+  candidatesapi:
+    image: bootcampici.azurecr.io/candidatesapi:latest
+    ports:
+      - 7003:7003
+    networks:
+      - election
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_CandidateDatabase__ConnectionString=mongodb://mongo:27017
+      - ASPNETCORE_CandidateDatabase__DatabaseName=Candidates
+
+  votesapi-pr:
+    image: nginx
+    ports:
+      - 80:80
+    networks:
+      - election
+
+  votesapi:
+    image: bootcampici.azurecr.io/votesapi:latest
+    ports:
+      - 7193:80
+    networks:
+      - election
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ConnectionStrings__VotesDatabase=Data Source=sqlserver; Initial Catalog=votes; User Id=sa;Password=Teste@admin123
+      - ASPNETCORE_Integrations__CandidateAddress=http://candidatesapi/api/candidates/
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Teste@admin123
+    ports:
+      - 1433:1433
+    networks:
+      - election
+
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - election
