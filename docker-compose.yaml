@@ -4,10 +4,18 @@ networks:
   election:
 
 services:
+
+  candidatesapi-pr:
+    image: nginx
+    ports:
+      - 80:80
+    networks:
+      - election
+
   candidatesapi:
     build: ./CandidatesAPI
     ports:
-      - 7003:80
+      - 7003:7003
     networks:
       - election
     environment:
@@ -15,10 +23,17 @@ services:
       - ASPNETCORE_CandidateDatabase__ConnectionString=mongodb://mongo:27017
       - ASPNETCORE_CandidateDatabase__DatabaseName=Candidates
 
+  votesapi-pr:
+    image: nginx
+    ports:
+      - 80:80
+    networks:
+      - election
+
   votesapi:
     build: ./VotesAPI
     ports:
-      - 7193:80
+      - 7193:7193
     networks:
       - election
     environment:
