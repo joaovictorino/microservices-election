@@ -1,9 +1,9 @@
-## How to execute the election API sample on Azure using Docker
+## How to execute the election API sample using Docker and Azure Container Instances
 
 ### Prerequisites
 - Azure account
-- VSCode
 - Docker
+- VSCode
 - Azure extension on VSCode
 - .Net 6 SDK
 
