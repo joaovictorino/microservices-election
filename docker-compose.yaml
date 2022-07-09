@@ -5,44 +5,50 @@ networks:
 
 services:
 
-  candidatesapi-pr:
-    image: nginx
+  candidatespr:
+    build: ./CandidatesPR
     ports:
-      - 80:80
+      - 81:80
     networks:
       - election
+    depends_on:
+      - candidatesapi
 
   candidatesapi:
     build: ./CandidatesAPI
-    ports:
-      - 7003:7003
     networks:
       - election
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_CandidateDatabase__ConnectionString=mongodb://mongo:27017
       - ASPNETCORE_CandidateDatabase__DatabaseName=Candidates
+    depends_on:
+      - mongo
 
-  votesapi-pr:
-    image: nginx
+  votespr:
+    build: ./VotesPR
     ports:
-      - 80:80
+      - 82:80
     networks:
       - election
+    depends_on:
+      - votesapi
 
   votesapi:
     build: ./VotesAPI
-    ports:
-      - 7193:7193
     networks:
       - election
+    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_ConnectionStrings__VotesDatabase=Data Source=sqlserver; Initial Catalog=votes; User Id=sa;Password=Teste@admin123
       - ASPNETCORE_Integrations__CandidateAddress=http://candidatesapi/api/candidates/
+    depends_on:
+      - candidatesapi
+      - sqlserver
 
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=Teste@admin123
