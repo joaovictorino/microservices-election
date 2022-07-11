@@ -1,0 +1,27 @@
+version: '3'
+
+networks:
+  election:
+
+services:
+
+  votespr:
+    image: bootcampici.azurecr.io/votespr:latest
+    ports:
+      - 80:80
+    networks:
+      - election
+    environment:
+      - VOTESAPI_ADDRESS=http://votesapi
+    depends_on:
+      - votesapi
+
+  votesapi:
+    image: bootcampici.azurecr.io/votesapi:latest
+    networks:
+      - election
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ConnectionStrings__VotesDatabase=Server=tcp:votessrv.database.windows.net,1433;Initial Catalog=votesdb;Persist Security Info=False;User ID=bootcampici;Password=Teste@admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+      - ASPNETCORE_Integrations__CandidateAddress=https://candidatesapi.azurewebsites.net/api/candidates/

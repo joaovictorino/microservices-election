@@ -1,0 +1,47 @@
+version: '3'
+
+networks:
+  election:
+
+services:
+
+  candidatespr:
+    image: bootcampici.azurecr.io/candidatespr:latest
+    ports:
+      - 80:80
+    networks:
+      - election
+    environment:
+      - CANDIDATESAPI_ADDRESS=http://candidatesapi
+    depends_on:
+      - candidatesapi
+
+  candidatesapi:
+    image: bootcampici.azurecr.io/candidatesapi:latest
+    networks:
+      - election
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_CandidateDatabase__ConnectionString=mongodb://candidatesdb:pWVtBwo46EckDqriHTLdZRSpzsrYRB4fjSlSrRGM4G1BH6kvHjdPJN2ArpBDinJw5y17WfZqfRrhjJD4oHt3Sg==@candidatesdb.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@candidatesdb@
+      - ASPNETCORE_CandidateDatabase__DatabaseName=Candidates
+  
+  votespr:
+    image: bootcampici.azurecr.io/votespr:latest
+    ports:
+      - 80:80
+    networks:
+      - election
+    environment:
+      - VOTESAPI_ADDRESS=http://votesapi
+    depends_on:
+      - votesapi
+
+  votesapi:
+    image: bootcampici.azurecr.io/votesapi:latest
+    networks:
+      - election
+    restart: always
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ConnectionStrings__VotesDatabase=Server=tcp:votessrv.database.windows.net,1433;Initial Catalog=votesdb;Persist Security Info=False;User ID=bootcampici;Password=Teste@admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+      - ASPNETCORE_Integrations__CandidateAddress=https://candidatesapi.azurewebsites.net/api/candidates/

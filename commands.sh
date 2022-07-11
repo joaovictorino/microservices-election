@@ -27,4 +27,10 @@ cd ../VotesAPI
 dotnet publish -c Release -o ./publish
 
 # Docker Compose
-docker compose -f docker-compose-azure.yaml up
+docker compose up --build
+
+# Docker Login Private Registry
+docker login [loginserver] -u [user]
+docker tag [actual name] [new name]
+docker push [container new name]
+

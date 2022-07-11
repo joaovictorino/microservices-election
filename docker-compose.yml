@@ -5,12 +5,14 @@ networks:
 
 services:
 
-  candidatespr:
-    build: ./CandidatesPR
+  candidatesproxy:
+    build: ./CandidatesProxy
     ports:
       - 81:80
     networks:
       - election
+    environment:
+      - CANDIDATESAPI_ADDRESS=http://candidatesapi
     depends_on:
       - candidatesapi
 
@@ -25,12 +27,14 @@ services:
     depends_on:
       - mongo
 
-  votespr:
-    build: ./VotesPR
+  votesproxy:
+    build: ./VotesProxy
     ports:
       - 82:80
     networks:
       - election
+    environment:
+      - VOTESAPI_ADDRESS=http://votesapi
     depends_on:
       - votesapi
 
