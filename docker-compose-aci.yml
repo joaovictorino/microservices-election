@@ -7,37 +7,79 @@ services:
 
   candidatespr:
     image: bootcampici.azurecr.io/candidatespr:latest
+    container_name: candidatespr
+    deploy:
+      resources:
+          limits:
+            cpus: '0.50'
+            memory: 0.5G
+          reservations:
+            cpus: '0.25'
+            memory: 0.2G
     ports:
       - 80:80
     networks:
       - election
     environment:
-      - CANDIDATESAPI_ADDRESS=http://candidatesapi
+      - CANDIDATESAPI_ADDRESS=http://localhost:84
     depends_on:
       - candidatesapi
 
   candidatesapi:
     image: bootcampici.azurecr.io/candidatesapi:latest
+    container_name: candidatesapi
+    deploy:
+      resources:
+          limits:
+            cpus: '1'
+            memory: 1G
+          reservations:
+            cpus: '1'
+            memory: 1G
+    ports:
+      - 84:84
     networks:
       - election
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_CandidateDatabase__ConnectionString=mongodb://candidatesdb:pWVtBwo46EckDqriHTLdZRSpzsrYRB4fjSlSrRGM4G1BH6kvHjdPJN2ArpBDinJw5y17WfZqfRrhjJD4oHt3Sg==@candidatesdb.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@candidatesdb@
       - ASPNETCORE_CandidateDatabase__DatabaseName=Candidates
+      - ASPNETCORE_URLS=http://+:84
   
   votespr:
     image: bootcampici.azurecr.io/votespr:latest
+    container_name: votespr
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 0.5G
+        reservations:
+          cpus: '0.25'
+          memory: 0.2G
     ports:
-      - 80:80
+      - 81:81
     networks:
       - election
     environment:
-      - VOTESAPI_ADDRESS=http://votesapi
+      - VOTESAPI_ADDRESS=http://localhost:86
+      - VOTESAPI_PORT=81
     depends_on:
       - votesapi
 
   votesapi:
     image: bootcampici.azurecr.io/votesapi:latest
+    container_name: votesapi
+    deploy:
+      resources:
+          limits:
+            cpus: '1'
+            memory: 1G
+          reservations:
+            cpus: '1'
+            memory: 1G
+    ports:
+      - 86:86
     networks:
       - election
     restart: always
@@ -45,3 +87,4 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_ConnectionStrings__VotesDatabase=Server=tcp:votessrv.database.windows.net,1433;Initial Catalog=votesdb;Persist Security Info=False;User ID=bootcampici;Password=Teste@admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
       - ASPNETCORE_Integrations__CandidateAddress=https://candidatesapi.azurewebsites.net/api/candidates/
+      - ASPNETCORE_URLS=http://+:86

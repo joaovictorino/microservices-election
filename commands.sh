@@ -34,3 +34,11 @@ docker login [loginserver] -u [user]
 docker tag [actual name] [new name]
 docker push [container new name]
 
+# Docker Compose and ACI
+# Install docker ACI integration
+docker login azure # open browser
+docker context create aci election-app
+docker context ls
+docker context use election-app
+docker login bootcampici.azurecr.io
+docker compose -f docker-compose-aci.yml up

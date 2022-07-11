@@ -1,6 +1,6 @@
 server {
-    listen       80;
-    listen  [::]:80;
+    listen       ${VOTESAPI_PORT};
+    listen  [::]:${VOTESAPI_PORT};
     server_name  localhost;
 
     location / {
