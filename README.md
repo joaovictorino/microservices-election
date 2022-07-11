@@ -8,7 +8,7 @@
 - .Net 6 SDK
 
 ### Architecture Local With Docker Compose
-![alt architecture](.documentation/Container Local.jpg "Architecture")
+![alt architecture](.documentation/ContainerLocal.jpg "Architecture")
 
 First let's create an [Azure Container Registry](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal?tabs=azure-cli), inside Azure Portal.
 
@@ -22,10 +22,10 @@ When we are using ACI, the simpler way is just run the APIs images, without Prox
 * Locally just run ```` docker compose up --build ```` at root folder.
 
 ### Architecture Local With Azure App Service
-![alt architecture](.documentation/Container App Service.jpg "Architecture")
+![alt architecture](.documentation/ContainerAppService.jpg "Architecture")
 
 ### Architecture Local With Azure Container Instances and Docker Compose
-![alt architecture](.documentation/Container ACI.jpg "Architecture")
+![alt architecture](.documentation/ContainerACI.jpg "Architecture")
 
 ### Architecture Local With Azure App Service
-![alt architecture](.documentation/Container Azure Container Apps.jpg "Architecture")
+![alt architecture](.documentation/ContainerAzureContainerApps.jpg "Architecture")
