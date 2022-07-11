@@ -21,11 +21,11 @@ When we are using ACI, the simpler way is just run the APIs images, without Prox
 
 * Locally just run ```` docker compose up --build ```` at root folder.
 
-### Architecture Local With Azure App Service
+### Architecture Local With Azure App Service and Docker Compose
 ![alt architecture](.documentation/ContainerAppService.jpg "Architecture")
 
 ### Architecture Local With Azure Container Instances and Docker Compose
 ![alt architecture](.documentation/ContainerACI.jpg "Architecture")
 
-### Architecture Local With Azure App Service
+### Architecture Local With Azure Container Apps
 ![alt architecture](.documentation/ContainerAzureContainerApps.jpg "Architecture")
