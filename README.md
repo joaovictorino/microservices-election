@@ -19,13 +19,19 @@ Using Azure, we have three simple ways to host containers, [Azure Container Inst
 
 When we are using ACI, the simpler way is just run the APIs images, without Proxy Reverse. Although Azure App service are a good way to run two containers, API e Proxy Reverse together and Azure Container Apps comes with Http Ingress for basic control.
 
-* Locally just run ```` docker compose up --build ```` at root folder.
+Locally just run ```` docker compose up --build ```` at root folder.
 
 ### Architecture Local With Azure App Service and Docker Compose
 ![alt architecture](.documentation/ContainerAppService.jpg "Architecture")
 
+App Service is an PaaS Serveless, you can deploy only your code, using runtimes supported by Azure, or run containers. One App Service hosts more than one container, it's scales vertically and horizontall, also supports auto-scale but you don't have fine control over network or deploy strategies.
+
 ### Architecture Local With Azure Container Instances and Docker Compose
 ![alt architecture](.documentation/ContainerACI.jpg "Architecture")
 
+Azure Container Instances it's like to have your own Docker/Docker Compose at Azure, with the same features and limitations. ACI doesn't support auto-scaling or deploy strategies, but you have an environment similar do Docker local.
+
 ### Architecture Local With Azure Container Apps
 ![alt architecture](.documentation/ContainerAzureContainerApps.jpg "Architecture")
+
+Azure Container Apps is an Kubernetes without complexity, but not all features are available. Also you have KEDA and Dapr for event driven applications and a solution of side-car. Supports auto scaling and some deploy strategies, like traffic splitting.
