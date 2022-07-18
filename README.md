@@ -24,6 +24,6 @@ Now create the databases [Azure SQL Database](https://docs.microsoft.com/en-us/a
 
 At this time, we will host ours containers in [Azure Container Instances](https://docs.microsoft.com/en-us/azure/container-instances/container-instances-quickstart-portal). When we are using ACI, the simpler way is just run the APIs images, without Proxy Reverse. 
 
-Finally create [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-get-started?pivots=programming-language-csharp), inside VSCode click-right on CountingFunction folder and click on Deploy to Function App.
+Finally create [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-get-started?pivots=programming-language-csharp) inside Azure Portal, then inside VSCode click-right on CountingFunction and click on Deploy to Function App.
 
 Now test the application!
