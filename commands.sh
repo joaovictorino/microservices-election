@@ -1,35 +1,30 @@
-# Databases
-docker run -d -p 27017:27017 mongo
-docker run -d -p 1433:1433 -e ACCEPT_EULA=Y -e SA_PASSWORD=Teste@admin123 mcr.microsoft.com/mssql/server:2019-latest
+# Create projects
+dotnet new webapi -o CandidatesAPI
+dotnet new webapi -o VotesAPI
+dotnet new webapi -o ReportsAPI
+dotnet new worker --name CountingWorker
 
 # MongoDb (CandidatesAPI)
 dotnet add package MongoDB.Driver
 
-# Entity Framework (VotesAPI)
+# Entity Framework (ReportsAPI)
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-dotnet tool install -g dotnet-ef
 dotnet add package Microsoft.EntityFrameworkCore.Design
-export PATH="$PATH:/home/vscode/.dotnet/tools"
+dotnet add package Microsoft.Extensions.Http.Polly
 dotnet ef migrations add InitialCreate
-dotnet ef database update
 
-# Publish
-cd CandidatesAPI
-dotnet publish -c Release -o ./publish
-cd ../VotesAPI
-dotnet publish -c Release -o ./publish
+# RabbitMQ (VotesAPI)
+dotnet add package RabbitMQ.Client
+dotnet add package Azure.Messaging.ServiceBus
 
-# Azure Function
-Install Azure function tools
+# RabbitMQ (CountingWorker)
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package RabbitMQ.Client
 
+# Docker Compose
+docker compose up --build
+
+# Create Azure Function (CountingFunction)
+# Install Azure function tools
 func init CountingFunction
 func new --template "Service Bus Queue Trigger" --name CountingTrigger
-
-Criar CosmosDB for MongoDB
-Criar SQL Databases
-Criar Azure Container Registry
-    Permitir admin user
-Criar Service Bus
-    Criar Queue
-Criar 3 Azure Container Instances
-Criar Azure Function (Premium - Linux)
