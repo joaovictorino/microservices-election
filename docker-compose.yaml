@@ -14,6 +14,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_CandidateDatabase__ConnectionString=mongodb://mongo:27017
       - ASPNETCORE_CandidateDatabase__DatabaseName=Candidates
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   votesapi:
     build: ./VotesAPI
@@ -21,12 +24,14 @@ services:
       - 7193:80
     networks:
       - election
-    restart: always
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_RabbitMQ=rabbitmq
       - ASPNETCORE_Azure=false
       - ASPNETCORE_Integrations__CandidateAddress=http://candidatesapi/api/candidates/
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   reportsapi:
     build: ./ReportsAPI
@@ -38,7 +43,10 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_ConnectionStrings__VotesDatabase=Data Source=sqlserver; Initial Catalog=votes; User Id=sa;Password=Teste@admin123
-
+    deploy:
+      restart_policy:
+        condition: on-failure
+        
   countingworker:
     build: ./CountingWorker
     networks:
