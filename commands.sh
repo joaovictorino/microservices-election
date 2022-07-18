@@ -25,6 +25,5 @@ dotnet add package RabbitMQ.Client
 docker compose up --build
 
 # Create Azure Function (CountingFunction)
-# Install Azure function tools
 func init CountingFunction
 func new --template "Service Bus Queue Trigger" --name CountingTrigger
