@@ -8,12 +8,12 @@
 - [Azure Function Tools](https://docs.microsoft.com/pt-br/azure/azure-functions/functions-run-local?tabs=v4%2Clinux%2Ccsharp%2Cportal%2Cbash)
 - .Net 6 SDK
 
-### Architecture Local With Docker Compose
+### Architecture local with Docker Compose
 ![alt architecture](.documentation/messaging_local.jpg "Architecture")
 
 Locally just run ```` docker compose up --build ```` at root folder.
 
-### Architecture inside Azure
+### Architecture inside Azure using Function
 ![alt architecture](.documentation/messaging_azure.jpg "Architecture")
 
 First let's create an [Azure Container Registry](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal?tabs=azure-cli), inside Azure Portal.
@@ -26,5 +26,4 @@ And then create [Azure Service Bus](https://docs.microsoft.com/en-us/azure/servi
 
 At this time, we will host ours containers in [Azure Container Instances](https://docs.microsoft.com/en-us/azure/container-instances/container-instances-quickstart-portal). When we are using ACI, the simpler way is just run the APIs images, without Proxy Reverse. 
 
-
-# Create Azure Function (Premium - Linux)
+At least, create Azure Function
