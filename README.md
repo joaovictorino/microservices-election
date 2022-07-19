@@ -38,7 +38,6 @@ az functionapp create -g [resource_group] -p [app_service_plan] -n countingfunct
 It's mandatory to set environment variables on Azure Function to pull images from ACR:
 
 ````sh
-DOCKER_CUSTOM_IMAGE_NAME
 DOCKER_REGISTRY_SERVER_URL
 DOCKER_REGISTRY_SERVER_USERNAME
 DOCKER_REGISTRY_SERVER_PASSWORD
