@@ -27,6 +27,7 @@ docker compose up --build
 # Create Azure Function (CountingFunction)
 func init CountingFunction
 func new --template "Service Bus Queue Trigger" --name CountingTrigger
+dotnet add package Microsoft.Azure.WebJobs.Extensions.Sql
 
 # Create Azure Function Container
 cd CountingFunction
@@ -43,13 +44,13 @@ az functionapp create -g [resource_group] -p [app_service_plan] -n countingfunct
 # DOCKER_REGISTRY_SERVER_USERNAME
 # DOCKER_REGISTRY_SERVER_PASSWORD
 
-# Kong e Keycloak
+# Kong migrations database
 docker-compose run -it kong kong migrations bootstrap
 
-# Keycloak 
+# Keycloak login
 admin/admin
 
-# install plugins
+# Install plugin OIDC Kong
 curl -s -X POST http://localhost:8001/plugins \
   -d name=oidc \
   -d config.client_id=kong \
@@ -59,7 +60,7 @@ curl -s -X POST http://localhost:8001/plugins \
   -d config.introspection_endpoint=http://172.19.0.12:8080/realms/bootcamp/protocol/openid-connect/token/introspect \
   -d config.discovery=http://172.19.0.12:8080/auth/realms/bootcamp/.well-known/openid-configuration
 
-# get token
+# Get token from Keycloak
 curl -X POST \
         -H "Content-Type: application/x-www-form-urlencoded" \
         -d "username=joao" \
@@ -68,7 +69,7 @@ curl -X POST \
         -d "client_id=app" \
         http://172.19.0.12:8080/realms/bootcamp/protocol/openid-connect/token 
 
-# access with token
+# Access API with JWT token throught Kong
 curl http://localhost:8000/reports -H "Authorization: Bearer {JWT}"
 curl http://localhost:8000/votes -H "Authorization: Bearer {JWT}"
 curl http://localhost:8000/candidates -H "Authorization: Bearer {JWT}"
