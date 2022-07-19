@@ -27,3 +27,18 @@ docker compose up --build
 # Create Azure Function (CountingFunction)
 func init CountingFunction
 func new --template "Service Bus Queue Trigger" --name CountingTrigger
+
+# Create Azure Function Container
+cd CountingFunction
+docker build -t [registry]/countingfunction .
+docker login [registry]
+docker push [registry]/countingfunction
+
+# Create Azure Function as Container from az-cli
+az functionapp create -g [resource_group] -p [app_service_plan] -n countingfunction -s [storage_account] --deployment-container-image-name [registry/image] --docker-registry-server-password [admin_registry_password] --docker-registry-server-user [admin_registry]
+
+# Set variables to Azure Function pull image from registry
+# DOCKER_CUSTOM_IMAGE_NAME
+# DOCKER_REGISTRY_SERVER_URL
+# DOCKER_REGISTRY_SERVER_USERNAME
+# DOCKER_REGISTRY_SERVER_PASSWORD

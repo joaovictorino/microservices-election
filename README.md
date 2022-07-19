@@ -24,6 +24,24 @@ Now create the databases [Azure SQL Database](https://docs.microsoft.com/en-us/a
 
 At this time, we will host ours containers in [Azure Container Instances](https://docs.microsoft.com/en-us/azure/container-instances/container-instances-quickstart-portal). When we are using ACI, the simpler way is just run the APIs images, without Proxy Reverse. 
 
-Finally create [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-get-started?pivots=programming-language-csharp) inside Azure Portal, then inside VSCode Azure extension, find workspace click-right on CountingTrigger and click on Deploy to Function App. Don't forget to set SQL Azure and Service Bus connection string on Azure Function configuration inside the portal.
+Finally create [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-get-started?pivots=programming-language-csharp) for .Net 6 environment inside Azure Portal, then inside VSCode Azure extension, find workspace click-right on CountingTrigger and click on Deploy to Function App. Don't forget to set SQL Azure and Service Bus connection string on Azure Function configuration inside the portal.
 
 Now test the application!
+
+### Hosting Azure Functions inside Container
+Another option, is create Azure Function as container, execute the command bellow using az-cli to create the function:
+
+````sh
+az functionapp create -g [resource_group] -p [app_service_plan] -n countingfunction -s [storage_account] --deployment-container-image-name [registry/custom_container_image_name]
+````
+
+It's mandatory to set environment variables on Azure Function to pull images from ACR:
+
+````sh
+DOCKER_CUSTOM_IMAGE_NAME
+DOCKER_REGISTRY_SERVER_URL
+DOCKER_REGISTRY_SERVER_USERNAME
+DOCKER_REGISTRY_SERVER_PASSWORD
+````
+
+Azure Function Dockerfile is inside CountingFunction project, build and push image to registry.
