@@ -27,6 +27,7 @@ docker compose up --build
 # Create Azure Function (CountingFunction)
 func init CountingFunction
 func new --template "Service Bus Queue Trigger" --name CountingTrigger
+dotnet add package Microsoft.Azure.WebJobs.Extensions.Sql
 
 # Create Azure Function Container
 cd CountingFunction
