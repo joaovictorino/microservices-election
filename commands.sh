@@ -49,6 +49,10 @@ docker-compose run -it kong kong migrations bootstrap
 
 # Keycloak login
 admin/admin
+http://localhost:8180/
+
+# Konga
+http://localhost:1337/
 
 # Install plugin OIDC Kong
 curl -s -X POST http://localhost:8001/plugins \

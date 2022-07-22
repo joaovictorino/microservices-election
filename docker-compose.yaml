@@ -16,6 +16,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_CandidateDatabase__DatabaseName=Candidates
       - ASPNETCORE_CandidateDatabase__ConnectionString=mongodb://mongo:27017
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   reportsapi:
     build: ./ReportsAPI
@@ -24,6 +27,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_ConnectionStrings__VotesDatabase=Data Source=sqlserver; Initial Catalog=votes; User Id=sa;Password=Teste@admin123
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   votesapi:
     build: ./VotesAPI
@@ -34,6 +40,9 @@ services:
       - ASPNETCORE_Azure=false
       - ASPNETCORE_RabbitMQ=rabbitmq
       - ASPNETCORE_Integrations__CandidateAddress=http://candidatesapi/api/candidates/
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   countingworker:
     build: ./CountingWorker
@@ -56,6 +65,9 @@ services:
       - 1433:1433
     networks:
       - election
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   mongo:
     image: mongo
@@ -63,7 +75,10 @@ services:
       - 27017:27017
     networks:
       - election
-
+    deploy:
+      restart_policy:
+        condition: on-failure
+        
   rabbitmq:
     image: rabbitmq:3.9-management
     ports:
@@ -71,6 +86,9 @@ services:
       - 15672:15672
     networks:
       - election
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   kong-db:
     image: postgres:11-alpine
@@ -84,6 +102,9 @@ services:
       - POSTGRES_DB=api-gw
       - POSTGRES_USER=kong
       - POSTGRES_PASSWORD=kong
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   kong:
     build:
@@ -113,6 +134,9 @@ services:
       - KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl
       - KONG_PLUGINS=bundled,oidc
       - KONG_LOG_LEVEL=debug
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   konga:
     image: pantsel/konga:0.14.9
@@ -130,6 +154,9 @@ services:
       - DB_PASSWORD=kong
       - DB_DATABASE=api-gw
       - NODE_ENV=development
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   keycloak-db:
     image: postgres:14-alpine
@@ -143,6 +170,9 @@ services:
       - POSTGRES_DB=keycloak
       - POSTGRES_USER=keycloak
       - POSTGRES_PASSWORD=password
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   keycloak:
     image: quay.io/keycloak/keycloak:17.0.0
@@ -162,3 +192,6 @@ services:
       - DB_PASSWORD=password
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
+    deploy:
+      restart_policy:
+        condition: on-failure

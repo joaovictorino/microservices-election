@@ -1,37 +1,24 @@
-1. Conceitos básicos de nuvem, utilizando o Azure
-* Nuvem pública, privada e híbrida
-* Infraestrutura como serviço
-* Plataforma como serviço
-* Software como serviço
-* Criação de conta de nuvem
-* Apresentação do estudo de caso
+## How to execute the election API sample using Kong and KeyCloak
 
-2. Microsserviços
-* Modelos de distribuição de sistemas
-* Modelagem de serviços REST
-* Melhoria do estudo de caso, modelando os serviços e modelos de distribuição Microsserviços
+### Prerequisites
+- Docker
+- VSCode
 
-3. Plataforma como serviço
-* Bancos de dados e ambientes de aplicação
-* Elementos PaaS
-* Melhoria do estudo de caso
+### Architecture local with Docker Compose
+![alt architecture](.documentation/apigateway_local.jpg "Architecture")
 
-4. Conteinerização
-* Conceitos de conteinerização
-* Conteinerizando a aplicação
-* Azure Container Instances
-* Melhoria do estudo de caso, conteinerização do projeto
+Locally just run ```` docker compose up --build ```` at root folder.
 
-5. Mensageria
-* Processamento assíncrono
-* Ferramentas de mensageria
-* RabbitMQ
-* Azure Service Bus
-* Melhoria do estudo de caso, estudando a necessidade de assincronismo no projeto
+## How to execute the election API sample using Azure APIM and Active Directory B2C
 
-6. API Gateway
-* Uso de API gateway
-* Exposição de APIs externas
-* Kong, Ocelot e outros
-* Azure API Management
-* Melhoria do estudo de caso, análise da inclusão de API gateway no projeto
+### Prerequisites
+- Azure account
+- Docker
+- VSCode
+- Azure extension on VSCode
+- [Azure Function Tools](https://docs.microsoft.com/pt-br/azure/azure-functions/functions-run-local?tabs=v4%2Clinux%2Ccsharp%2Cportal%2Cbash)
+- .Net 6 SDK
+- Terraform
+
+### Architecture inside Azure
+![alt architecture](.documentation/apigateway_azure.jpg "Architecture")
