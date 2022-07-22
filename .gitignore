@@ -1,3 +1,6 @@
+.terraform
+*.hcl
+*.tfstate*
 bin
 obj
 publish
