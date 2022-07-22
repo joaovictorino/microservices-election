@@ -30,7 +30,10 @@
 				"mongodb.mongodb-vscode",
 				"ms-mssql.sql-database-projects-vscode",
 				"ms-mssql.mssql",
-				"humao.rest-client"
+				"humao.rest-client",
+				"ms-azuretools.vscode-azureterraform",
+				"ms-azuretools.vscode-azureterraform",
+				"ms-mssql.mssql"
 			]
 		}
 	},
