@@ -2,6 +2,7 @@
 
 ### Prerequisites
 - Azure account
+- Azure Client (command-line)
 - Docker
 - Docker Compose
 - VSCode
