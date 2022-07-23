@@ -65,7 +65,7 @@ resource "azurerm_container_group" "election" {
       "ASPNETCORE_URLS" = "http://+:81"
       "ASPNETCORE_Azure" = "true"
       "ASPNETCORE_RabbitMQ" = azurerm_servicebus_namespace.bootcamp.default_primary_connection_string
-      "ASPNETCORE_Integrations__CandidateAddress" = "http://election.eastus.azurecontainer.io/api/candidates/"
+      "ASPNETCORE_Integrations__CandidateAddress" = "http://localhost/api/candidates/"
     }
   }
 
