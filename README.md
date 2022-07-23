@@ -13,6 +13,7 @@ Locally just run ```` docker compose up --build ```` at root folder.
 
 ### Prerequisites
 - Azure account
+- Azure Client (command-line)
 - Docker
 - VSCode
 - Azure extension on VSCode
