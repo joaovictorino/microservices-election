@@ -13,7 +13,7 @@ Locally just run ```` docker compose up --build ```` at root folder.
 
 ### Prerequisites
 - Azure account
-- Azure Client (command-line)
+- Azure client (command-line)
 - Docker
 - VSCode
 - Azure extension on VSCode
@@ -23,3 +23,10 @@ Locally just run ```` docker compose up --build ```` at root folder.
 
 ### Architecture inside Azure
 ![alt architecture](.documentation/apigateway_azure.jpg "Architecture")
+
+Go to Infrastructure/Terraform folder and execute commands bellow:
+
+````sh
+terraform init
+terraform apply -auto-approve
+````
