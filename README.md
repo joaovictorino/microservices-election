@@ -3,6 +3,7 @@
 ### Prerequisites
 - Azure account
 - Docker
+- Docker Compose
 - VSCode
 - Azure extension on VSCode
 - .Net 6 SDK
