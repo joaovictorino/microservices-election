@@ -26,7 +26,6 @@ resource "azurerm_linux_function_app" "countingfunction" {
         FUNCTION_APP_EDIT_MODE                    = "readOnly"
         https_only                                = true
         ServiceBusConnection                      = azurerm_servicebus_namespace.bootcamp.default_primary_connection_string
-        DOCKER_CUSTOM_IMAGE_NAME                  = "bootcampici.azurecr.io/countingfunction"
         DOCKER_REGISTRY_SERVER_URL                = "https://${azurerm_container_registry.bootcampici.login_server}/"
         DOCKER_REGISTRY_SERVER_USERNAME           = azurerm_container_registry.bootcampici.admin_username
         DOCKER_REGISTRY_SERVER_PASSWORD           = azurerm_container_registry.bootcampici.admin_password
