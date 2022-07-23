@@ -26,6 +26,7 @@ resource "azurerm_linux_function_app" "countingfunction" {
         FUNCTION_APP_EDIT_MODE                    = "readOnly"
         https_only                                = true
         ServiceBusConnection                      = azurerm_servicebus_namespace.bootcamp.default_primary_connection_string
+        DOCKER_CUSTOM_IMAGE_NAME                  = "bootcampici.azurecr.io/countingfunction"
         DOCKER_REGISTRY_SERVER_URL                = "https://${azurerm_container_registry.bootcampici.login_server}/"
         DOCKER_REGISTRY_SERVER_USERNAME           = azurerm_container_registry.bootcampici.admin_username
         DOCKER_REGISTRY_SERVER_PASSWORD           = azurerm_container_registry.bootcampici.admin_password
@@ -40,15 +41,6 @@ resource "azurerm_linux_function_app" "countingfunction" {
 
     site_config {
       always_on         = true
-      application_stack {
-        docker {
-            registry_url      = azurerm_container_registry.bootcampici.login_server
-            image_name        = "countingfunction"
-            image_tag         = "latest"
-            registry_username = azurerm_container_registry.bootcampici.admin_username
-            registry_password = azurerm_container_registry.bootcampici.admin_password
-        }
-      }
     }
 
     depends_on = [
