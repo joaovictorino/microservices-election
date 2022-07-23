@@ -30,17 +30,13 @@ resource "azurerm_cosmosdb_account" "candidatesdb" {
   }
 
   geo_location {
-    location          = "eastus"
-    failover_priority = 1
-  }
-
-  geo_location {
-    location          = "eastus"
+    location = azurerm_resource_group.bootcamp.location
     failover_priority = 0
+    zone_redundant = false
   }
 }
 
-resource "azurerm_cosmosdb_mongo_database" "example" {
+resource "azurerm_cosmosdb_mongo_database" "candidatesdb" {
   name                = "candidatesdb"
   resource_group_name = azurerm_resource_group.bootcamp.name
   account_name        = azurerm_cosmosdb_account.candidatesdb.name

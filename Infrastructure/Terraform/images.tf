@@ -1,10 +1,10 @@
 resource "null_resource" "build_images" {
     provisioner "local-exec" {
+      working_dir = "${path.module}/../../"
       command = <<-EOT
-        cd .. &&
-        docker build -t bootcampici.azurecr.io/candidatesapi ./CandidatesAPI &&
-        docker build -t bootcampici.azurecr.io/reportsapi ./ReportsAPI &&
-        docker build -t bootcampici.azurecr.io/votesapi ./VotesAPI &&
+        docker build -t bootcampici.azurecr.io/candidatesapi ./CandidatesAPI && 
+        docker build -t bootcampici.azurecr.io/reportsapi ./ReportsAPI && 
+        docker build -t bootcampici.azurecr.io/votesapi ./VotesAPI && 
         docker build -t bootcampici.azurecr.io/countingfunction ./CountingFunction
       EOT
     }
