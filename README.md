@@ -3,6 +3,7 @@
 ### Prerequisites
 - Azure account
 - Docker
+- Docker Compose
 - VSCode
 - Azure extension on VSCode
 - [Azure Function Tools](https://docs.microsoft.com/pt-br/azure/azure-functions/functions-run-local?tabs=v4%2Clinux%2Ccsharp%2Cportal%2Cbash)
