@@ -43,7 +43,7 @@ resource "azurerm_linux_function_app" "countingfunction" {
       application_stack {
         docker {
             registry_url      = azurerm_container_registry.bootcampici.login_server
-            image_name        = "bootcampici.azurecr.io/countingfunction"
+            image_name        = "countingfunction"
             image_tag         = "latest"
             registry_username = azurerm_container_registry.bootcampici.admin_username
             registry_password = azurerm_container_registry.bootcampici.admin_password
