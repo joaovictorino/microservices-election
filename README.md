@@ -45,7 +45,7 @@ curl -s -X POST http://localhost:8001/plugins \
 
 Visualize the configuration inside Konga at [http://localhost:1337/](http://localhost:1337/), go to plugins and click on oidc. If it's your first time at Konga, then create your user and set Kong Admin API http://kong:8001 to Konga.
 
-Inside Konga UI let's create the routes and services needed for election API, import konga_snapshot.json file at Kong folder, and then execute requests files.
+Inside Konga UI let's import routes and services needed for election API, find konga_snapshot.json file inside Kong folder and import just services and routes, after that execute requests files.
 
 Reference - [https://github.com/d4rkstar/kong-konga-keycloak](https://github.com/d4rkstar/kong-konga-keycloak)
 
