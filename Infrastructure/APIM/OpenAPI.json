@@ -72,7 +72,7 @@
           }
         }
       },
-      "/reports": {
+      "/api/reports": {
         "get": {
           "tags": [
             "Reports"

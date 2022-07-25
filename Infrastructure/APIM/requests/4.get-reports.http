@@ -1,4 +1,4 @@
-GET https://election-api.azure-api.net/reports HTTP/1.1
-Host: election-api.azure-api.net
-Ocp-Apim-Subscription-Key: 77059e0713fa4c1c8bb399e1a6d42e3f
+GET https://election-apim.azure-api.net/api/reports HTTP/1.1
+Host: election-apim.azure-api.net
+Ocp-Apim-Subscription-Key: 0ef96477997e4645997ce33ad0744950
 Ocp-Apim-Trace: true

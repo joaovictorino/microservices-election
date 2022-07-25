@@ -1,7 +1,7 @@
-POST https://election-api.azure-api.net/api/candidates HTTP/1.1
-Host: election-api.azure-api.net
+POST https://election-apim.azure-api.net/api/candidates HTTP/1.1
+Host: election-apim.azure-api.net
 Content-Type: application/json
-Ocp-Apim-Subscription-Key: 77059e0713fa4c1c8bb399e1a6d42e3f
+Ocp-Apim-Subscription-Key: 0ef96477997e4645997ce33ad0744950
 Ocp-Apim-Trace: true
 
-{"name":"string","number":0,"birthDate":"string"}
+{"name":"Teste", "number": 9, "birthDate":"2022-07-24T23:35:57.489Z"}
