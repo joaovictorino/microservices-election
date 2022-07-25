@@ -29,9 +29,25 @@ Finaly create the user, set the fields bellow and save:
 |-----------|------------------------|------------|------------|-----------------|
 |   joao    | jhvictorino@gmail.com  |    João    |  Victorino |       true      |
 
-After go to credentials tab, fill password with Teste@admin123 and switch off temporary flag, click on Set Password.
+After go to credentials tab, fill password with "Teste@admin123" and switch off temporary flag, click on Set Password.
+Let's configure Kong to secure ours APIs, OIDC plugin is already installed in Kong, but we need to configure it, execute the command bellow, replacing with your values:
 
-[Reference](https://github.com/d4rkstar/kong-konga-keycloak)
+````sh
+curl -s -X POST http://localhost:8001/plugins \
+  -d name=oidc \
+  -d config.client_id=kong \
+  -d config.client_secret=[kong app client secret inside KeyCloak] \
+  -d config.bearer_only=yes \
+  -d config.realm=bootcamp \
+  -d config.introspection_endpoint=http://[KeyCloak docker IP]:8080/realms/bootcamp/protocol/openid-connect/token/introspect \
+  -d config.discovery=http://[KeyCloak docker IP]:8080/auth/realms/bootcamp/.well-known/openid-configuration
+````
+
+Visualize the configuration inside Konga at [http://localhost:1337/](http://localhost:1337/), go to plugins and click on oidc. If it's your first time at Konga, then create your user and set Kong Admin API http://kong:8001 to Konga.
+
+Inside Konga UI let's create the routes and services needed for election API, import konga_snapshot.json file at Kong folder, and then execute requests files.
+
+Reference - [https://github.com/d4rkstar/kong-konga-keycloak](https://github.com/d4rkstar/kong-konga-keycloak)
 
 ## How to execute the election API sample using Azure APIM and Active Directory B2C
 

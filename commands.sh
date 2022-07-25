@@ -54,24 +54,24 @@ http://localhost:8180/
 # Konga
 http://localhost:1337/
 
-# Install plugin OIDC Kong
+# Configure plugin OIDC Kong
 curl -s -X POST http://localhost:8001/plugins \
   -d name=oidc \
   -d config.client_id=kong \
-  -d config.client_secret=x0KPu2n0bIQxyg78HNcRERFyKmu83Kdr \
+  -d config.client_secret=LxDZQbmrma2PftGVYEmUTnlWxsNJOaxN \
   -d config.bearer_only=yes \
   -d config.realm=bootcamp \
-  -d config.introspection_endpoint=http://172.19.0.12:8080/realms/bootcamp/protocol/openid-connect/token/introspect \
-  -d config.discovery=http://172.19.0.12:8080/auth/realms/bootcamp/.well-known/openid-configuration
+  -d config.introspection_endpoint=http://172.18.0.12:8080/realms/bootcamp/protocol/openid-connect/token/introspect \
+  -d config.discovery=http://172.18.0.12:8080/auth/realms/bootcamp/.well-known/openid-configuration
 
 # Get token from Keycloak
 curl -X POST \
         -H "Content-Type: application/x-www-form-urlencoded" \
         -d "username=joao" \
-        -d "password=teste" \
+        -d "password=Teste@admin123" \
         -d 'grant_type=password' \
         -d "client_id=app" \
-        http://172.19.0.12:8080/realms/bootcamp/protocol/openid-connect/token 
+        http://172.18.0.12:8080/realms/bootcamp/protocol/openid-connect/token 
 
 # Access API with JWT token throught Kong
 curl http://localhost:8000/reports -H "Authorization: Bearer {JWT}"
