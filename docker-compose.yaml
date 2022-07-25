@@ -108,7 +108,7 @@ services:
 
   kong:
     build:
-      context: ./kong   
+      context: ./Infrastructure/Kong   
     image: kong-oidc:latest
     depends_on:
       - kong-db
