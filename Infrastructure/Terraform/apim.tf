@@ -8,15 +8,6 @@ resource "azurerm_api_management" "election-apim" {
   sku_name = "Developer_1"
 }
 
-resource "azuread_application" "election-app-ad" {
-  display_name = "election-api"
-}
-
-resource "azuread_application_password" "election-app-ad-pwd" {
-  application_object_id = azuread_application.election-app-ad.object_id
-  end_date_relative     = "36h"
-}
-
 resource "azurerm_aadb2c_directory" "bootcamp-ici" {
   country_code            = "US"
   data_residency_location = "United States"
@@ -24,6 +15,19 @@ resource "azurerm_aadb2c_directory" "bootcamp-ici" {
   domain_name             = "bootcampici.onmicrosoft.com"
   resource_group_name     = azurerm_resource_group.bootcamp.name
   sku_name                = "PremiumP1"
+}
+
+provider "azuread" {
+  tenant_id = azurerm_aadb2c_directory.bootcamp-ici.tenant_id
+}
+
+resource "azuread_application" "election-app-ad" {
+  display_name = "election-api"
+}
+
+resource "azuread_application_password" "election-app-ad-pwd" {
+  application_object_id = azuread_application.election-app-ad.object_id
+  end_date_relative     = "36h"
 }
 
 resource "azurerm_api_management_identity_provider_aadb2c" "election-apim-aadb2c" {
