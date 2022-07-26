@@ -9,7 +9,7 @@
 
 Locally just run ```` docker compose up --build ```` at root folder, and after run ```` docker compose run -it --rm kong kong migrations bootstrap ```` for Kong database migration.
 
-Open KeyCloak address at http://localhost:8180/, user: admin and password: admin. Follow the steps in the reference bellow to create realm named bootcamp, two clients and user at KeyCloak.
+Open KeyCloak address at http://localhost:8180, user: admin and password: admin. Follow the steps in the reference bellow to create realm named bootcamp, two clients and user at KeyCloak.
 
 Create a client for Kong, change the fields bellow and save:
 
