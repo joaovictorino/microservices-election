@@ -9,7 +9,7 @@
 
 Locally just run ```` docker compose up --build ```` at root folder, and after run ```` docker compose run -it --rm kong kong migrations bootstrap ```` for Kong database migration.
 
-Open KeyCloak address at [http://localhost:8180/](http://localhost:8180/), user: admin and password: admin. Follow the steps in the reference bellow to create realm named bootcamp, two clients and user at KeyCloak.
+Open KeyCloak address at http://localhost:8180/, user: admin and password: admin. Follow the steps in the reference bellow to create realm named bootcamp, two clients and user at KeyCloak.
 
 Create a client for Kong, change the fields bellow and save:
 
@@ -43,11 +43,11 @@ curl -s -X POST http://localhost:8001/plugins \
   -d config.discovery=http://[KeyCloak docker IP]:8080/auth/realms/bootcamp/.well-known/openid-configuration
 ````
 
-Visualize the configuration inside Konga at [http://localhost:1337/](http://localhost:1337/), go to plugins and click on oidc. If it's your first time at Konga, then create your user and set Kong Admin API http://kong:8001 to Konga.
+Visualize the configuration inside Konga at http://localhost:1337, go to plugins and click on oidc. If it's your first time at Konga, then create your user and set Kong Admin API http://kong:8001 to Konga.
 
 Inside Konga UI let's import routes and services needed for election API, find konga_snapshot.json file inside Kong folder and import just services and routes, after that execute requests files inside Kong folder.
 
-Reference - [https://github.com/d4rkstar/kong-konga-keycloak](https://github.com/d4rkstar/kong-konga-keycloak)
+Reference - https://github.com/d4rkstar/kong-konga-keycloak
 
 ## How to execute the election API sample using Azure APIM and Active Directory B2C
 
@@ -73,13 +73,8 @@ terraform apply -auto-approve
 
 After terraform execution, go to Azure Portal import OpenAPI.json file inside API Management, and set backend http endpoint of ACI as following:
 
-CandidatesAPI
-http://election.eastus.azurecontainer.io/api
-
-VotesAPI
-http://election.eastus.azurecontainer.io:81/api
-
-ReportsAPI
-http://election.eastus.azurecontainer.io:82/api
+CandidatesAPI - http://election.eastus.azurecontainer.io/api
+VotesAPI - http://election.eastus.azurecontainer.io:81/api
+ReportsAPI - http://election.eastus.azurecontainer.io:82/api
 
 Test the API with requests files inside APIM folder.
