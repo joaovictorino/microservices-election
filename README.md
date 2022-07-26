@@ -5,7 +5,7 @@
 - VSCode
 
 ### Architecture local with Docker Compose
-![alt architecture](.documentation/apigateway_local.jpg "Architecture")
+![alt architecture](.documentation/gateway_local.jpg "Architecture")
 
 Locally just run ```` docker compose up --build ```` at root folder, and after run ```` docker compose run -it --rm kong kong migrations bootstrap ```` for Kong database migration.
 
@@ -62,7 +62,7 @@ Reference - https://github.com/d4rkstar/kong-konga-keycloak
 - Terraform
 
 ### Architecture inside Azure
-![alt architecture](.documentation/apigateway_azure.jpg "Architecture")
+![alt architecture](.documentation/gateway_azure.jpg "Architecture")
 
 Go to Infrastructure/Terraform folder and execute commands bellow:
 
