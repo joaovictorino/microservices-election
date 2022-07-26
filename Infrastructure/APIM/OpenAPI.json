@@ -5,7 +5,7 @@
       "version": "1.0"
     },
     "paths": {
-      "/api/candidates": {
+      "/candidates": {
         "get": {
           "tags": [
             "Candidates"
@@ -72,7 +72,7 @@
           }
         }
       },
-      "/api/reports": {
+      "/reports": {
         "get": {
           "tags": [
             "Reports"
@@ -110,7 +110,7 @@
           }
         }
       },
-      "/api/votes": {
+      "/votes": {
         "post": {
           "tags": [
             "Votes"
