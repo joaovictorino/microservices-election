@@ -1,3 +1,4 @@
+using MongoDB.Driver;
 using Microsoft.AspNetCore.Mvc;
 using CandidatesAPI.Models;
 using CandidatesAPI.Infrastructure;
@@ -35,7 +36,14 @@ public class CandidatesController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> Create(Candidate candidate)
     {
-        await repository.CreateAsync(candidate);
+        try
+        {
+            await repository.CreateAsync(candidate);
+        }
+        catch(MongoWriteException)
+        {
+            return Conflict();
+        }
 
         return Ok();
     }

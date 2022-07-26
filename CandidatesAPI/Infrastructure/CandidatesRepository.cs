@@ -11,6 +11,9 @@ public class CandidatesRepository{
         var mongoClient = new MongoClient(settings.Value.ConnectionString);
         var mongoDatabase = mongoClient.GetDatabase(settings.Value.DatabaseName);
         candidateCollection = mongoDatabase.GetCollection<Candidate>("Candidates");
+        candidateCollection.Indexes.CreateOne(
+                new CreateIndexModel<Candidate>(Builders<Candidate>.IndexKeys.Descending(model => model.Number),
+                new CreateIndexOptions { Unique = true }));
     }
     
     public async Task<List<Candidate>> GetAllAsync() =>
