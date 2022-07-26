@@ -49,7 +49,7 @@ Inside Konga UI let's import routes and services needed for election API, find k
 
 Reference - https://github.com/d4rkstar/kong-konga-keycloak
 
-## How to execute the election API sample using Azure APIM
+## How to execute the election API sample using Azure API Management
 
 ### Prerequisites
 - Azure account
