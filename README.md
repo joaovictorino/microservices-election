@@ -74,7 +74,9 @@ terraform apply -auto-approve
 After terraform execution, go to Azure Portal import OpenAPI.json file inside API Management, and set backend http endpoint of ACI as following:
 
 CandidatesAPI - http://election.eastus.azurecontainer.io/api
+
 VotesAPI - http://election.eastus.azurecontainer.io:81/api
+
 ReportsAPI - http://election.eastus.azurecontainer.io:82/api
 
 Test the API with requests files inside APIM folder.
