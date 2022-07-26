@@ -1,0 +1,6 @@
+POST https://election-apim.azure-api.net/votes
+Host: election-apim.azure-api.net
+Content-Type: application/json
+Ocp-Apim-Subscription-Key: e9dc78a964624ca382dc88f0edbe1748
+
+{"numberCandidate":9}

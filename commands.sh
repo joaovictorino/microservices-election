@@ -1,71 +1,79 @@
-# Databases
-docker run -d -p 27017:27017 mongo
-docker run -d -p 1433:1433 -e ACCEPT_EULA=Y -e SA_PASSWORD=Teste@admin123 mcr.microsoft.com/mssql/server:2019-latest
+# Create projects
+dotnet new webapi -o CandidatesAPI
+dotnet new webapi -o VotesAPI
+dotnet new webapi -o ReportsAPI
+dotnet new worker --name CountingWorker
 
 # MongoDb (CandidatesAPI)
 dotnet add package MongoDB.Driver
 
-# Entity Framework (VotesAPI)
+# Entity Framework (ReportsAPI)
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-dotnet tool install -g dotnet-ef
 dotnet add package Microsoft.EntityFrameworkCore.Design
-export PATH="$PATH:/home/vscode/.dotnet/tools"
+dotnet add package Microsoft.Extensions.Http.Polly
 dotnet ef migrations add InitialCreate
-dotnet ef database update
 
-# Publish
-cd CandidatesAPI
-dotnet publish -c Release -o ./publish
-cd ../VotesAPI
-dotnet publish -c Release -o ./publish
+# RabbitMQ (VotesAPI)
+dotnet add package RabbitMQ.Client
+dotnet add package Azure.Messaging.ServiceBus
 
-# Container
-docker login bootcampici.azurecr.io
-docker push bootcampici.azurecr.io/votesapi
-docker push bootcampici.azurecr.io/candidatesapi
-docker push bootcampici.azurecr.io/reportsapi
+# RabbitMQ (CountingWorker)
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package RabbitMQ.Client
 
-# Azure Function
-Install Azure function tools
+# Docker Compose
+docker compose up --build
 
+# Create Azure Function (CountingFunction)
 func init CountingFunction
 func new --template "Service Bus Queue Trigger" --name CountingTrigger
+dotnet add package Microsoft.Azure.WebJobs.Extensions.Sql
 
-Criar CosmosDB for MongoDB
-Criar SQL Databases
-Criar Azure Container Registry
-    Permitir admin user
-Criar Service Bus
-    Criar Queue
-Criar 3 Azure Container Instances
-Criar Azure Function (Premium - Linux)
+# Create Azure Function Container
+cd CountingFunction
+docker build -t [registry]/countingfunction .
+docker login [registry]
+docker push [registry]/countingfunction
 
-# Kong e Keycloak
+# Create Azure Function as Container from az-cli
+az functionapp create -g [resource_group] -p [app_service_plan] -n countingfunction -s [storage_account] --deployment-container-image-name [registry/image] --docker-registry-server-password [admin_registry_password] --docker-registry-server-user [admin_registry]
+
+# Set variables to Azure Function pull image from registry
+# DOCKER_CUSTOM_IMAGE_NAME
+# DOCKER_REGISTRY_SERVER_URL
+# DOCKER_REGISTRY_SERVER_USERNAME
+# DOCKER_REGISTRY_SERVER_PASSWORD
+
+# Kong migrations database
 docker-compose run -it kong kong migrations bootstrap
 
-# Keycloak 
+# Keycloak login
 admin/admin
+http://localhost:8180/
 
-# install plugins
+# Konga
+http://localhost:1337/
+
+# Configure plugin OIDC Kong
 curl -s -X POST http://localhost:8001/plugins \
   -d name=oidc \
   -d config.client_id=kong \
-  -d config.client_secret=x0KPu2n0bIQxyg78HNcRERFyKmu83Kdr \
+  -d config.client_secret=LxDZQbmrma2PftGVYEmUTnlWxsNJOaxN \
   -d config.bearer_only=yes \
   -d config.realm=bootcamp \
-  -d config.introspection_endpoint=http://172.19.0.12:8080/realms/bootcamp/protocol/openid-connect/token/introspect \
-  -d config.discovery=http://172.19.0.12:8080/auth/realms/bootcamp/.well-known/openid-configuration
+  -d config.introspection_endpoint=http://172.18.0.12:8080/realms/bootcamp/protocol/openid-connect/token/introspect \
+  -d config.discovery=http://172.18.0.12:8080/auth/realms/bootcamp/.well-known/openid-configuration
 
-# get token
+# Get token from Keycloak
 curl -X POST \
         -H "Content-Type: application/x-www-form-urlencoded" \
         -d "username=joao" \
-        -d "password=teste" \
+        -d "password=Teste@admin123" \
         -d 'grant_type=password' \
         -d "client_id=app" \
-        http://172.19.0.12:8080/realms/bootcamp/protocol/openid-connect/token 
+        http://172.18.0.12:8080/realms/bootcamp/protocol/openid-connect/token 
 
-# access with token
+# Access API with JWT token throught Kong
 curl http://localhost:8000/reports -H "Authorization: Bearer {JWT}"
 curl http://localhost:8000/votes -H "Authorization: Bearer {JWT}"
 curl http://localhost:8000/candidates -H "Authorization: Bearer {JWT}"
