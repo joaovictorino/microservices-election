@@ -26,8 +26,19 @@ When we are using ACI, the simpler way is just run the APIs images, without Prox
 ![alt architecture](.documentation/container_appservice.jpg "Architecture")
 
 App Service is an PaaS Serveless, you can deploy only your code, using runtimes supported by Azure, or run containers. One App Service hosts more than one container, it's scales vertically and horizontally, also supports auto-scaling but you don't have fine control over network or deploy strategies.
+At Azure Portal create two App Services and upload Docker Compose file inside CandidatesProxy and VotesProxy projects.
 
 ### Architecture with Azure Container Instances and Docker Compose
 ![alt architecture](.documentation/container_aci.jpg "Architecture")
 
 Azure Container Instances it's like to have your own Docker/Docker Compose at Azure, with the same features and limitations. ACI doesn't support auto-scaling or deploy strategies, but you have an environment similar to Docker local, like internal DNS.
+To run the microservices inside ACI execute commands bellow:
+
+````sh
+docker login azure # open browser
+docker context create aci election-app # create ACI
+docker context ls 
+docker context use election-app # change context to ACI
+docker login bootcampici.azurecr.io # login on ACR
+docker compose -f docker-compose-aci.yml up # create containers of Docker Compose inside ACI
+````
