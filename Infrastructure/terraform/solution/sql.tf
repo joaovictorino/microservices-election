@@ -1,7 +1,7 @@
 resource "azurerm_mssql_server" "votessrv" {
   name                         = "votessrv"
-  resource_group_name          = azurerm_resource_group.bootcamp.name
-  location                     = azurerm_resource_group.bootcamp.location
+  resource_group_name          = var.resource_group.name
+  location                     = var.resource_group.location
   version                      = "12.0"
   administrator_login          = "bootcampuser"
   administrator_login_password = "Teste@admin123"

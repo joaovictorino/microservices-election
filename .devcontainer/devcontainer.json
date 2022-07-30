@@ -33,7 +33,8 @@
 				"humao.rest-client",
 				"ms-azuretools.vscode-azureterraform",
 				"ms-azuretools.vscode-azureterraform",
-				"ms-mssql.mssql"
+				"ms-mssql.mssql",
+				"hashicorp.terraform"
 			]
 		}
 	},

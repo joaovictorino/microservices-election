@@ -19,6 +19,6 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "bootcamp" {
-  name     = "bootcamp"
+  name     = "bootcamp-containerapps"
   location = "eastus"
 }

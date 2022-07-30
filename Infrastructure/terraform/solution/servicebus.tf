@@ -1,7 +1,7 @@
 resource "azurerm_servicebus_namespace" "bootcamp" {
   name                = "electionbootcamp-namespace"
-  location            = azurerm_resource_group.bootcamp.location
-  resource_group_name = azurerm_resource_group.bootcamp.name
+  location            = var.resource_group.location
+  resource_group_name = var.resource_group.name
   sku                 = "Standard"
 
   tags = {

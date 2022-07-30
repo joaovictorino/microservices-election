@@ -1,7 +1,7 @@
 resource "azurerm_cosmosdb_account" "candidatesdb" {
   name                = "candidatesdb"
-  location            = azurerm_resource_group.bootcamp.location
-  resource_group_name = azurerm_resource_group.bootcamp.name
+  location            = var.resource_group.location
+  resource_group_name = var.resource_group.name
   offer_type          = "Standard"
   kind                = "MongoDB"
 
@@ -30,7 +30,7 @@ resource "azurerm_cosmosdb_account" "candidatesdb" {
   }
 
   geo_location {
-    location = azurerm_resource_group.bootcamp.location
+    location = var.resource_group.location
     failover_priority = 0
     zone_redundant = false
   }
@@ -38,7 +38,7 @@ resource "azurerm_cosmosdb_account" "candidatesdb" {
 
 resource "azurerm_cosmosdb_mongo_database" "candidatesdb" {
   name                = "candidatesdb"
-  resource_group_name = azurerm_resource_group.bootcamp.name
+  resource_group_name = var.resource_group.name
   account_name        = azurerm_cosmosdb_account.candidatesdb.name
   throughput          = 400
 }
