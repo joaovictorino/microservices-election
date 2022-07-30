@@ -29,3 +29,7 @@ resource "azurerm_role_assignment" "acrpull_role" {
   principal_id                     = data.azuread_service_principal.aks_principal.id
   skip_service_principal_aad_check = true
 }
+
+// az aks get-credential
+// apply k8s terraform integration k8s.tf
+// apply k8s files k8s.tf
