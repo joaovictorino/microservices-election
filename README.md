@@ -9,7 +9,7 @@ To test the application execute the command bellow and keep the output
 az ad sp create-for-rbac
 ````
 
-Inside the folder Infrastructure/Terraform/aks create the file "terraform.tfvars" with the following content, replace the values with the result of the command above
+Inside the folder Infrastructure/terraform/aks create the file "terraform.tfvars" with the following content, replace the values with the result of the command above
 
 ````sh
 appId=""

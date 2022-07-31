@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: api-candidates
+  name: api-candidates
+  namespace: bootcamp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-candidates
+  template:
+    metadata:
+      labels:
+        app: api-candidates
+    spec:
+      containers:
+      - image: bootcampici.azurecr.io/candidatesapi
+        imagePullPolicy: Always
+        name: api-candidates
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                name: bootcamp-configmap
+                key: ASPNETCORE_ENVIRONMENT
+          - name: ASPNETCORE_CandidateDatabase__DatabaseName
+            valueFrom:
+              configMapKeyRef:
+                name: bootcamp-configmap
+                key: ASPNETCORE_CandidateDatabase__DatabaseName
+          - name: ASPNETCORE_CandidateDatabase__ConnectionString
+            valueFrom:
+              configMapKeyRef:
+                name: bootcamp-configmap
+                key: ASPNETCORE_CandidateDatabase__ConnectionString
+        ports:
+          - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}

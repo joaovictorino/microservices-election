@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: api-votes
+  name: api-votes
+  namespace: bootcamp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-votes
+  template:
+    metadata:
+      labels:
+        app: api-votes
+    spec:
+      containers:
+      - image: bootcampici.azurecr.io/votesapi
+        imagePullPolicy: Always
+        name: api-votes
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                name: bootcamp-configmap
+                key: ASPNETCORE_ENVIRONMENT
+          - name: ASPNETCORE_Azure
+            valueFrom:
+              configMapKeyRef:
+                name: bootcamp-configmap
+                key: ASPNETCORE_Azure
+          - name: ASPNETCORE_RabbitMQ
+            valueFrom:
+              configMapKeyRef:
+                name: bootcamp-configmap
+                key: ASPNETCORE_RabbitMQ
+          - name: ASPNETCORE_Integrations__CandidateAddress
+            valueFrom:
+              configMapKeyRef:
+                name: bootcamp-configmap
+                key: ASPNETCORE_Integrations__CandidateAddress
+        ports:
+          - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}

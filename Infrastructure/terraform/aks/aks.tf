@@ -3,8 +3,7 @@ resource "azurerm_kubernetes_cluster" "bootcamp-aks" {
   location            = azurerm_resource_group.bootcamp.location
   resource_group_name = azurerm_resource_group.bootcamp.name
   dns_prefix          = "bootcamp-k8s"
-  http_application_routing_enabled = true
-  role_based_access_control_enabled = true
+  http_application_routing_enabled = false
 
   default_node_pool {
     name            = "default"
@@ -30,6 +29,25 @@ resource "azurerm_role_assignment" "acrpull_role" {
   skip_service_principal_aad_check = true
 }
 
-// az aks get-credential
-// apply k8s terraform integration k8s.tf
-// apply k8s files k8s.tf
+resource "null_resource" "get_credentials" {
+    triggers = {
+        order = azurerm_kubernetes_cluster.bootcamp-aks.id
+    }
+
+    provisioner "local-exec" {
+      command = "az aks get-credentials --resource-group ${azurerm_resource_group.bootcamp.name} --name ${azurerm_kubernetes_cluster.bootcamp-aks.name} --overwrite-existing"
+    }
+
+    depends_on = [
+      azurerm_kubernetes_cluster.bootcamp-aks
+    ]
+}
+
+data "azurerm_kubernetes_cluster" "default" {
+  name                = azurerm_kubernetes_cluster.bootcamp-aks.name
+  resource_group_name = azurerm_resource_group.bootcamp.name
+
+  depends_on = [
+    azurerm_kubernetes_cluster.bootcamp-aks
+  ]
+}

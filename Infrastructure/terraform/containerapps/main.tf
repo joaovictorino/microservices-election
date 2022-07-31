@@ -22,3 +22,8 @@ resource "azurerm_resource_group" "bootcamp" {
   name     = "bootcamp-containerapps"
   location = "eastus"
 }
+
+module solution {
+  source = "../solution"
+  resource_group = azurerm_resource_group.bootcamp
+}

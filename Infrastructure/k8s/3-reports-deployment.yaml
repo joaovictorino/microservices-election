@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: api-reports
+  name: api-reports
+  namespace: bootcamp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-reports
+  template:
+    metadata:
+      labels:
+        app: api-reports
+    spec:
+      containers:
+      - image: bootcampici.azurecr.io/reportsapi
+        imagePullPolicy: Always
+        name: api-reports
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                name: bootcamp-configmap
+                key: ASPNETCORE_ENVIRONMENT
+          - name: ASPNETCORE_ConnectionStrings__VotesDatabase
+            valueFrom:
+              configMapKeyRef:
+                name: bootcamp-configmap
+                key: ASPNETCORE_ConnectionStrings__VotesDatabase
+        ports:
+          - containerPort: 80
+        resources: {}
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}
