@@ -7,7 +7,7 @@ metadata:
   name: bootcamp-configmap
   namespace: bootcamp
 data:
-  ASPNETCORE_Azure: "true"
+  ASPNETCORE_Azure: true
   ASPNETCORE_CandidateDatabase__ConnectionString: ${module.solution.azurerm_cosmosdb_account.connection_strings[0]}
   ASPNETCORE_CandidateDatabase__DatabaseName: Candidates
   ASPNETCORE_ConnectionStrings__VotesDatabase: Server=tcp:${module.solution.azurerm_mssql_server.fully_qualified_domain_name},1433;Initial Catalog=${module.solution.azurerm_mssql_database.name};Persist Security Info=False;User ID=${module.solution.azurerm_mssql_server.administrator_login};Password=${module.solution.azurerm_mssql_server.administrator_login_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;

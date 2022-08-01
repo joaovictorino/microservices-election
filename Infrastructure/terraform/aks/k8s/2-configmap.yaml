@@ -4,7 +4,7 @@ metadata:
   name: bootcamp-configmap
   namespace: bootcamp
 data:
-  ASPNETCORE_Azure: "true"
+  ASPNETCORE_Azure: true
   ASPNETCORE_CandidateDatabase__ConnectionString: mongodb://candidatesdb:1pV2fcPgj2MH3jlpNMgs3cpJcMkL46P1VEuQD1pxSdcTucaUSJBpq2iqmz2dPM3tkPE2WCzdb2N2MYGqz2ltpw==@candidatesdb.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@candidatesdb@
   ASPNETCORE_CandidateDatabase__DatabaseName: Candidates
   ASPNETCORE_ConnectionStrings__VotesDatabase: Server=tcp:votessrv.database.windows.net,1433;Initial Catalog=votesdb;Persist Security Info=False;User ID=bootcampuser;Password=Teste@admin123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
