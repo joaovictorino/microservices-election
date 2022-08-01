@@ -3,13 +3,13 @@ kind: Ingress
 metadata:
   name: ingress-election
   namespace: bootcamp
-  labels:
-      name: ingress-election
   annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-    - http:
+    - host: election.1dff985c90ef461b8526.eastus.aksapp.io
+      http:
         paths:
           - path: /candidates(/|$)(.*)
             pathType: Prefix
