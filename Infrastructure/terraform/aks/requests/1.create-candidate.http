@@ -1,5 +1,5 @@
 
-POST http://election.1dff985c90ef461b8526.eastus.aksapp.io/candidates/api/candidates 
+POST http://election.ba016832bc1a473f8d53.eastus.aksapp.io/candidates/api/candidates 
 Content-Type: application/json
 
 {

@@ -13,7 +13,7 @@ data:
   ASPNETCORE_ConnectionStrings__VotesDatabase: "Server=tcp:${module.solution.azurerm_mssql_server.fully_qualified_domain_name},1433;Initial Catalog=${module.solution.azurerm_mssql_database.name};Persist Security Info=False;User ID=${module.solution.azurerm_mssql_server.administrator_login};Password=${module.solution.azurerm_mssql_server.administrator_login_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
   ASPNETCORE_ENVIRONMENT: "Production"
   ASPNETCORE_Integrations__CandidateAddress: "http://candidates-svc/api/candidates/"
-  ASPNETCORE_RabbitMQ: "Endpoint=${module.solution.azurerm_servicebus_namespace.default_primary_connection_string}"
+  ASPNETCORE_RabbitMQ: "${module.solution.azurerm_servicebus_namespace.default_primary_connection_string}"
 EOF
     depends_on = [ 
       null_resource.get_credentials,
