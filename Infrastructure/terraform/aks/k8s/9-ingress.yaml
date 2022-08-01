@@ -5,27 +5,27 @@ metadata:
   namespace: bootcamp
   annotations:
     kubernetes.io/ingress.class: addon-http-application-routing
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/rewrite-target: /api/$1
 spec:
   rules:
     - host: election.ba016832bc1a473f8d53.eastus.aksapp.io
       http:
         paths:
-          - path: /candidates(/|$)(.*)
+          - path: /(candidates/?.*)
             pathType: Prefix
             backend:
               service:
                 name: candidates-svc
                 port:
                   number: 80
-          - path: /votes(/|$)(.*)
+          - path: /(votes/?.*)
             pathType: Prefix
             backend:
               service:
                 name: votes-svc
                 port: 
                   number: 80
-          - path: /reports(/|$)(.*)
+          - path: /(reports/?.*)
             pathType: Prefix
             backend:
               service:
