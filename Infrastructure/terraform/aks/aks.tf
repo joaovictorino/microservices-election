@@ -4,6 +4,7 @@ resource "azurerm_kubernetes_cluster" "bootcamp-aks" {
   resource_group_name = azurerm_resource_group.bootcamp.name
   dns_prefix          = "bootcamp-k8s"
   http_application_routing_enabled = true
+  kubernetes_version = "1.21.14"
 
   default_node_pool {
     name            = "default"
