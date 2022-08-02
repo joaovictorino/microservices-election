@@ -1,6 +1,6 @@
-POST http://election.d10d2c85d6c94dff848f.eastus.aksapp.io/votes
+POST http://election.07916ca604464cb38a76.eastus.aksapp.io/votes
 Content-Type: application/json
 
 {
-  "numberCandidate": 18
+  "numberCandidate": 0
 }
