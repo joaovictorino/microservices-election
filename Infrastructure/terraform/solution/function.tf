@@ -1,5 +1,11 @@
+resource "random_string" "random_vm" {
+  length           = 20
+  upper            = false
+  special          = false
+}
+
 resource "azurerm_storage_account" "bootcamp" {
-  name                     = "countingfunctionsa"
+  name                     = "countingfunc${random_string.random_vm.result}"
   resource_group_name      = var.resource_group.name
   location                 = var.resource_group.location
   account_tier             = "Standard"
