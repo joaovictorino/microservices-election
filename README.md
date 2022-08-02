@@ -57,4 +57,4 @@ terraform init
 terraform apply -auto-approve
 ````
 
-Execute http files at containerapps/requests folder to test the application.
+Go to Azure Portal, find Container Apps created, copy Application URL to browser accessing Swagger page.
