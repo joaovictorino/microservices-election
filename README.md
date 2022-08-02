@@ -10,7 +10,7 @@
 
 Azure Kubernetes Service is an Kubernetes full-featured with Azure services integrations, like disks, load balancers, etc.
 
-To test the application execute the command bellow and keep the output
+To test the application execute the command bellow and keep the output:
 
 ````sh
 az ad sp create-for-rbac
@@ -30,8 +30,9 @@ terraform init
 terraform apply -auto-approve
 ````
 
-Wait terraform finish, go to Azure Portal, get DNS of your AKS cluster, replace the host value inside 9-ingress.yaml file, follow the format election.<DNS FROM AKS>.
-Inside the folder aks, apply the file again
+Just wait terraform finish, go to Azure Portal, get DNS of your AKS cluster, replace the host value inside 9-ingress.yaml file, follow the format "election.<DNS FROM AKS>".
+
+Inside the folder aks, apply the file again:
 
 ````sh
 kubectl apply -f k8s/9-ingress.yaml 
