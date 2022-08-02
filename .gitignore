@@ -6,4 +6,4 @@ obj
 publish
 *.tfvars
 config.json
-Infrastructure/terraform/aks/k8s/2-configmap.yaml
+2-configmap.yaml
