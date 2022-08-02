@@ -37,7 +37,7 @@ Inside the folder aks, apply the file again
 kubectl apply -f k8s/9-ingress.yaml 
 ````
 
-Finally relace the host inside http files at aks/requests folder to test the application.
+Finally, relace the host inside http files at aks/requests folder and test the application.
 
 ### Architecture with Azure Container Apps
 ![alt architecture](.documentation/containerapps.jpg "Architecture")
