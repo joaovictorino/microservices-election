@@ -1,5 +1,5 @@
 resource "random_string" "random_vm" {
-  length           = 20
+  length           = 10
   upper            = false
   special          = false
 }
