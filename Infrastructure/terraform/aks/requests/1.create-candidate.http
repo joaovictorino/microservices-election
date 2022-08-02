@@ -1,9 +1,9 @@
 
-POST http://election.ba016832bc1a473f8d53.eastus.aksapp.io/candidates 
+POST http://election.d10d2c85d6c94dff848f.eastus.aksapp.io/candidates 
 Content-Type: application/json
 
 {
-  "name": "Teste 2",
+  "name": "Teste",
   "number": 18,
   "birthDate": "2022-06-16T03:51:38.716Z"
 }

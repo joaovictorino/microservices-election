@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /api/$1
 spec:
   rules:
-    - host: election.ba016832bc1a473f8d53.eastus.aksapp.io
+    - host: election.d10d2c85d6c94dff848f.eastus.aksapp.io
       http:
         paths:
           - path: /(candidates/?.*)
