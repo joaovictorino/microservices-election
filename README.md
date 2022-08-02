@@ -31,10 +31,10 @@ terraform apply -auto-approve
 ````
 
 Wait terraform finish, go to Azure Portal, get DNS of your AKS cluster, replace the host value inside 9-ingress.yaml file, follow the format election.<DNS FROM AKS>.
-Inside the folder, apply the file again
+Inside the folder aks, apply the file again
 
 ````sh
-kubectl apply -f 9-ingress.yaml
+kubectl apply -f k8s/9-ingress.yaml 
 ````
 
 Finally relace the host inside http files at aks/requests folder to test the application.
