@@ -32,4 +32,5 @@ export PATH="$PATH:/home/vscode/.dotnet/tools"
 dotnet ef database update
 ````
 
-After executed, SQL Server table will be created, and then execute ````dotnet run````. Access https://localhost:7193/swagger/index.html and test, trying to vote.
+After executed, SQL Server table will be created, and then execute ````dotnet run````. Access https://localhost:7193/swagger/index.html and test, trying to vote.   
+There is others branch inside this repository with more advanced examples of microservices using the election case.
